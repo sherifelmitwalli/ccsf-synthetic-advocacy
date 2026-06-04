@@ -1,0 +1,9 @@
+# Exact tested versions (Python 3.12.3) used to generate the published results,
+# figures and CSVs. Install with:  pip install -r requirements-lock.txt
+numpy==2.4.4
+scipy==1.17.1
+scikit-learn==1.8.0
+matplotlib==3.10.8
+torch==2.12.0
+transformers==4.44.2
+sentence-transformers==5.5.1
