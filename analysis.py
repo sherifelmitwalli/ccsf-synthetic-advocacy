@@ -1,8 +1,10 @@
 """
 analysis.py  -- CCSF proof-of-concept analysis pipeline.
-Computes the five fingerprint features with real models, runs inferential statistics,
-account-level clustering, detection ROC/AUC, an ablation, and a non-duplication check,
-then writes results.json and publication figures.
+Computes the account-level signals with real models (four primary fingerprint
+signals plus stance variability as an exploratory candidate), runs inferential
+statistics, account-level clustering, detection ROC/AUC, a leave-one-out ablation
+of the four-signal composite with a stance sensitivity analysis, and a
+non-duplication check, then writes results.json and supporting arrays.
 """
 import json, math, re, itertools, warnings, collections, csv
 from pathlib import Path
@@ -149,6 +151,8 @@ results["meta"] = dict(
     n_posts_by_group={g: len(G[g]) for g in groups},
     lm="gpt2", embed_model="all-MiniLM-L6-v2",
     compliance_lexicon=corpus_gen.COMPLIANCE_LEXICON,
+    composite_signals=["ppl_mean", "burstiness", "compliance", "convergence"],
+    exploratory_signals=["stance_std"],
 )
 
 # account-level comparisons for the 5 fingerprint features
@@ -170,19 +174,26 @@ for g in groups:
                                   for f in acc_feats}
 
 # ---------------------------------------------------------------- composite anomaly score (equal weights)
-# A_i = mean[ Z(-P), Z(-B), Z(L), Z(-S_stance), Z(E) ]  (per-account, standardised across all accounts).
+# PRIMARY composite (four signals): A_i = mean[ Z(-P), Z(-B), Z(L), Z(E) ]
+# (per-account, standardised across all accounts).
 # Perplexity is treated as a feature FAMILY: mean perplexity enters the composite, while
 # within-account perplexity variance (ppl_var) is reported descriptively only and is
 # deliberately excluded from the composite to avoid double-weighting the perplexity family.
-# The composite is the MEAN (not sum) of the five oriented z-scores; this scaling choice
+# Stance variability (stance_std) is an EXPLORATORY candidate signal: it performed at
+# chance and is reported descriptively and in a sensitivity analysis (added as a fifth
+# input), but it is NOT part of the primary composite.
+# The composite is the MEAN (not sum) of the four oriented z-scores; this scaling choice
 # does not affect any AUC (a monotonic transform) but keeps the score on an interpretable scale.
-M = np.array([[a["ppl_mean"], a["burstiness"], a["compliance"], a["stance_std"], a["convergence"]]
+M = np.array([[a["ppl_mean"], a["burstiness"], a["compliance"], a["convergence"]]
               for a in acc_rows], float)
 labels_syn = np.array([1 if a["group"] == "synthetic" else 0 for a in acc_rows])
 labels_3 = np.array([a["group"] for a in acc_rows])
 Z = StandardScaler().fit_transform(M)
-signs = np.array([-1, -1, +1, -1, +1])  # P-, B-, L+, S(stance var)-, E+
+signs = np.array([-1, -1, +1, +1])  # P-, B-, L+, E+
 anomaly = (Z * signs).mean(axis=1)
+# standardised stance (for the sensitivity analysis only)
+z_stance = StandardScaler().fit_transform(
+    np.array([[a["stance_std"]] for a in acc_rows], float)).ravel()
 for a, s in zip(acc_rows, anomaly):
     a["anomaly"] = float(s)
 
@@ -231,13 +242,30 @@ results["auc"]["composite_vs_both_ci"] = [lo, hi]
 lo2, hi2 = bootstrap_auc_ci(y_op, anomaly)
 results["auc"]["composite_machineorigin_vs_human_ci"] = [lo2, hi2]
 
+# Illustrative prevalence scenarios (PPV/FDR). Operating threshold = 95th
+# percentile of human (organic+professional) account scores; sensitivity and
+# specificity are in-corpus values at that threshold; PPV is then computed for
+# assumed real-world prevalences. These are ILLUSTRATIVE calculations under
+# assumed prevalences, not empirical estimates of operational performance.
+hum_scores = anomaly[np.isin(labels_3, ["organic", "professional"])]
+syn_scores = anomaly[labels_3 == "synthetic"]
+thr = float(np.quantile(hum_scores, 0.95))
+sens = float((syn_scores > thr).mean())
+spec = float((hum_scores <= thr).mean())
+scen = {}
+for p in (0.01, 0.05, 0.10):
+    ppv = sens * p / (sens * p + (1 - spec) * (1 - p))
+    scen[f"prev_{p}"] = dict(ppv=float(ppv), fdr=float(1 - ppv))
+results["auc"]["ppv_scenarios"] = dict(threshold=thr, sensitivity=sens,
+                                       specificity=spec, scenarios=scen)
+
 # single-feature account-level AUCs (synthetic vs organic+professional), orient each feature
 feat_orient = dict(ppl_mean=True, burstiness=True, compliance=False, stance_std=True, convergence=False)
 for f, inv in feat_orient.items():
     results["auc"][f"feature_{f}_vs_both"] = auc_for(f, negatives=("organic", "professional"), invert=inv)
 
 # ---------------------------------------------------------------- supervised cross-validated detector (rigor check)
-Xcv = Z  # standardized 5 features
+Xcv = Z  # standardized 4 primary signals
 ycv = labels_syn
 skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=corpus_gen.SEED)
 clf = LogisticRegression(max_iter=1000)
@@ -246,16 +274,23 @@ results["auc"]["logreg_cv_mean"] = float(cv_auc.mean())
 results["auc"]["logreg_cv_sd"] = float(cv_auc.std())
 
 # ---------------------------------------------------------------- ablation (leave-one-feature-out, composite AUC vs both)
-feat_names = ["ppl_mean", "burstiness", "compliance", "stance_std", "convergence"]
+feat_names = ["ppl_mean", "burstiness", "compliance", "convergence"]
 full_auc = results["auc"]["composite_vs_both"]
 results["ablation"]["full"] = full_auc
 for j, fn in enumerate(feat_names):
-    keep = [k for k in range(5) if k != j]
+    keep = [k for k in range(4) if k != j]
     Zsub = Z[:, keep]
-    sub_anom = (Zsub * signs[keep]).sum(axis=1)
-    results["ablation"][f"drop_{fn}"] = dict(
-        auc=auc_for(sub_anom, negatives=("organic", "professional")),
-        delta=auc_for(sub_anom, negatives=("organic", "professional")) - full_auc)
+    # mean (not sum) of the remaining oriented z-scores, mirroring the full
+    # composite definition; the two are monotonically equivalent, so all AUCs
+    # are identical either way.
+    sub_anom = (Zsub * signs[keep]).mean(axis=1)
+    a = auc_for(sub_anom, negatives=("organic", "professional"))
+    results["ablation"][f"drop_{fn}"] = dict(auc=a, delta=a - full_auc)
+# sensitivity analysis: ADD the exploratory stance signal as a fifth input
+# (oriented: lower stance variability = more coordinated)
+anom5 = (np.column_stack([Z * signs, -z_stance])).mean(axis=1)
+a5 = auc_for(anom5, negatives=("organic", "professional"))
+results["ablation"]["with_stance_sensitivity"] = dict(auc=a5, delta=a5 - full_auc)
 
 # ---------------------------------------------------------------- unsupervised clustering (account level)
 km = KMeans(n_clusters=4, n_init=10, random_state=corpus_gen.SEED).fit(Z)
@@ -271,7 +306,7 @@ for c in set(km.labels_):
 purity /= len(labels_3)
 gmap = {"organic": 0, "synthetic": 1, "professional": 2, "mixed": 3}
 ari = adjusted_rand_score([gmap[g] for g in labels_3], km.labels_)
-results["clustering"] = dict(method="KMeans(k=4) on 5 standardized account features",
+results["clustering"] = dict(method="KMeans(k=4) on the 4 standardized primary composite signals",
                              silhouette=float(sil), purity=float(purity),
                              adjusted_rand=float(ari), cluster_composition=comp)
 
@@ -340,11 +375,12 @@ with open(BASE / "account_features.csv", "w", newline="", encoding="utf-8") as f
 
 print("\n=== KEY RESULTS ===")
 print("Accounts:", results["meta"]["n_accounts"])
-print("Composite AUC syn vs organic:", round(results["auc"]["composite_vs_organic"],3))
+print("Composite (4-signal) AUC syn vs organic:", round(results["auc"]["composite_vs_organic"],3))
 print("Composite AUC syn vs professional:", round(results["auc"]["composite_vs_professional"],3))
 print("Composite AUC syn vs both human:", round(results["auc"]["composite_vs_both"],3))
 print("Composite AUC mixed vs organic:", round(results["auc"]["composite_mixed_vs_organic"],3))
 print("Composite AUC machine-origin vs human:", round(results["auc"]["composite_machineorigin_vs_human"],3))
+print("With-stance sensitivity AUC:", round(results["ablation"]["with_stance_sensitivity"]["auc"],3))
 print("LogReg 5-fold CV AUC (syn vs rest):", round(results["auc"]["logreg_cv_mean"],3), "+/-", round(results["auc"]["logreg_cv_sd"],3))
 print("KMeans(k=4) silhouette:", round(sil,3), "purity:", round(purity,3), "ARI:", round(ari,3))
 print("Non-dup mean Jaccard (syn):", round(results["nonduplication"]["synthetic"]["mean_jaccard"],3),

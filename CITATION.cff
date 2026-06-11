@@ -7,12 +7,10 @@ message: >-
   software (this file) and the associated manuscript.
 type: software
 authors:
-  - given-names: "[Author One]"
-    family-names: "[Surname]"
-    orcid: "https://orcid.org/0000-0000-0000-0000"
-  - given-names: "[Author Two]"
-    family-names: "[Surname]"
-repository-code: "https://github.com/[ORG]/ccsf-ands"   # to be completed on deposit
+  - given-names: "Sherif"
+    family-names: "Elmitwalli"
+    affiliation: "Tobacco Control Research Group, Department for Health, University of Bath, Bath, UK"
+repository-code: "https://github.com/sherifelmitwalli/ccsf-synthetic-advocacy"
 abstract: >-
   Code and fully synthetic data for a controlled proof-of-concept study of
   Compliance-Constrained Semantic Fingerprinting (CCSF), a privacy-preserving,
@@ -27,4 +25,4 @@ keywords:
   - alternative nicotine delivery systems
 license: MIT
 version: "1.0.0"
-date-released: "2026-06-04"
+date-released: "2026-06-11"

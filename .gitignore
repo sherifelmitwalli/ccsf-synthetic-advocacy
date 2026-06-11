@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+# manuscript drafts and internal audit reports are not part of the
+# public reproducibility package
+CCSF_TobaccoControl_manuscript*.docx
+CCSF_TobaccoControl_manuscript*.pdf
+CCSF_audit_report.md
+CCSF_fingerprint_revision_report.md
+~$*.docx
