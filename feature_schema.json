@@ -1,0 +1,10 @@
+{
+  "method_name": "Coordinated Communication Signal Fingerprinting",
+  "method_acronym": "CCSF",
+  "legacy_field_mapping": {
+    "mixed": "rule-perturbed synthetic",
+    "compliance": "commercial_policy_framing",
+    "acc_compliance": "account-level commercial_policy_framing"
+  },
+  "note": "Numeric baseline files retain legacy headers for backward compatibility; manuscript-facing labels use the mapped terminology."
+}

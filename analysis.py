@@ -1,5 +1,5 @@
 """
-analysis.py  -- CCSF proof-of-concept analysis pipeline.
+analysis.py  -- Coordinated Communication Signal Fingerprinting (CCSF) baseline analysis pipeline.
 Computes the account-level signals with real models (four primary fingerprint
 signals plus stance variability as an exploratory candidate), runs inferential
 statistics, account-level clustering, detection ROC/AUC, a leave-one-out ablation
@@ -20,12 +20,21 @@ from sklearn.cluster import KMeans, AgglomerativeClustering, DBSCAN
 from sklearn.metrics import roc_auc_score, silhouette_score, adjusted_rand_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedKFold, cross_val_score
+from sklearn.pipeline import make_pipeline
 from sklearn.manifold import TSNE
 from scipy import stats
 import corpus_gen
 
 RNG = np.random.RandomState(corpus_gen.SEED)
 torch.manual_seed(corpus_gen.SEED)
+
+# Model identity is recorded with every regenerated result. Revisions are currently
+# intentionally explicit about being unpinned; resolve immutable Hub commit IDs before
+# a publication release rather than implying reproducibility that is not present.
+MODEL_SPECS = {
+    "perplexity": {"model_id": "gpt2", "revision": "UNPINNED; pin immutable revision before release"},
+    "embedding": {"model_id": "all-MiniLM-L6-v2", "revision": "UNPINNED; pin immutable revision before release"},
+}
 
 # ---------------------------------------------------------------- load models
 print("Loading models ...")
@@ -61,7 +70,7 @@ def compliance_density(text):
     low = text.lower()
     toks = max(len(tokens(text)), 1)
     hits = 0
-    for term in corpus_gen.COMPLIANCE_LEXICON:
+    for term in corpus_gen.COMMERCIAL_POLICY_FRAMING_LEXICON:
         pattern = r"(?<![a-z])" + re.escape(term.lower()) + r"(?![a-z])"
         hits += len(re.findall(pattern, low))
     return hits / toks
@@ -146,13 +155,16 @@ results = {"meta": {}, "tests": [], "auc": {}, "clustering": {}, "ablation": {},
            "nonduplication": {}, "descriptives": {}}
 
 results["meta"] = dict(
+    method_name="Coordinated Communication Signal Fingerprinting", method_acronym="CCSF",
     seed=corpus_gen.SEED, n_posts=len(rows),
     n_accounts={g: len(A[g]) for g in groups},
     n_posts_by_group={g: len(G[g]) for g in groups},
-    lm="gpt2", embed_model="all-MiniLM-L6-v2",
-    compliance_lexicon=corpus_gen.COMPLIANCE_LEXICON,
+    lm="gpt2", embed_model="all-MiniLM-L6-v2", model_specs=MODEL_SPECS,
+    commercial_policy_framing_lexicon=corpus_gen.COMMERCIAL_POLICY_FRAMING_LEXICON,
     composite_signals=["ppl_mean", "burstiness", "compliance", "convergence"],
     exploratory_signals=["stance_std"],
+    baseline_condition_labels={"mixed": "rule-perturbed synthetic"},
+    evidence_scope="Controlled construct-validity baseline; not independent or operational validation.",
 )
 
 # account-level comparisons for the 5 fingerprint features
@@ -212,13 +224,14 @@ def auc_for(score_name_or_vec, positive="synthetic", negatives=("organic",), inv
 results["auc"]["composite_vs_organic"] = auc_for(anomaly, negatives=("organic",))
 results["auc"]["composite_vs_professional"] = auc_for(anomaly, negatives=("professional",))
 results["auc"]["composite_vs_both"] = auc_for(anomaly, negatives=("organic", "professional"))
-results["auc"]["composite_mixed_vs_organic"] = auc_for(anomaly, positive="mixed", negatives=("organic",))
+results["auc"]["composite_rule_perturbed_vs_organic"] = auc_for(anomaly, positive="mixed", negatives=("organic",))
 
-# Realistic operational target: any machine-origin coordination (synthetic OR mixed)
-# treated as positive, vs genuine human discourse (organic + professional) as negative.
+# Exploratory simulation contrast: campaign-template and rule-perturbed template
+# accounts versus the two simulated human-style groups. It is not a machine-origin
+# detector result and must not be interpreted as one.
 mask_op = np.array([a["group"] in ("synthetic", "mixed", "organic", "professional") for a in acc_rows])
 y_op = np.array([1 if a["group"] in ("synthetic", "mixed") else 0 for a in acc_rows])
-results["auc"]["composite_machineorigin_vs_human"] = float(roc_auc_score(y_op, anomaly))
+results["auc"]["composite_template_vs_simulated_human"] = float(roc_auc_score(y_op, anomaly))
 
 # bootstrap 95% CIs for the two headline composite AUCs (stratified resampling of accounts)
 def bootstrap_auc_ci(y, s, n_boot=2000, seed=corpus_gen.SEED):
@@ -240,7 +253,7 @@ y_both = np.array([1 if a["group"] == "synthetic" else 0 for a in acc_rows])[mas
 lo, hi = bootstrap_auc_ci(y_both, anomaly[mask_both])
 results["auc"]["composite_vs_both_ci"] = [lo, hi]
 lo2, hi2 = bootstrap_auc_ci(y_op, anomaly)
-results["auc"]["composite_machineorigin_vs_human_ci"] = [lo2, hi2]
+results["auc"]["composite_template_vs_simulated_human_ci"] = [lo2, hi2]
 
 # Illustrative prevalence scenarios (PPV/FDR). Operating threshold = 95th
 # percentile of human (organic+professional) account scores; sensitivity and
@@ -265,13 +278,19 @@ for f, inv in feat_orient.items():
     results["auc"][f"feature_{f}_vs_both"] = auc_for(f, negatives=("organic", "professional"), invert=inv)
 
 # ---------------------------------------------------------------- supervised cross-validated detector (rigor check)
-Xcv = Z  # standardized 4 primary signals
+# Scaling is intentionally inside the pipeline: each held-out fold is transformed
+# only with statistics estimated from its corresponding training fold.
+Xcv = M
 ycv = labels_syn
 skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=corpus_gen.SEED)
-clf = LogisticRegression(max_iter=1000)
+clf = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
 cv_auc = cross_val_score(clf, Xcv, ycv, cv=skf, scoring="roc_auc")
 results["auc"]["logreg_cv_mean"] = float(cv_auc.mean())
 results["auc"]["logreg_cv_sd"] = float(cv_auc.std())
+results["auc"]["logreg_cv_protocol"] = (
+    "Stratified 5-fold interpolation within one synthetic generator; StandardScaler "
+    "is fit inside each training fold through a Pipeline. This is not external validation."
+)
 
 # ---------------------------------------------------------------- ablation (leave-one-feature-out, composite AUC vs both)
 feat_names = ["ppl_mean", "burstiness", "compliance", "convergence"]
@@ -360,10 +379,11 @@ np.savez(BASE / "arrays.npz",
 
 # human-readable CSV exports (regenerated by this script for full reproducibility)
 with open(BASE / "synthetic_corpus.csv", "w", newline="", encoding="utf-8") as f:
-    w = csv.DictWriter(f, fieldnames=["id", "account", "group", "topic", "text"])
+    w = csv.DictWriter(f, fieldnames=["id", "account", "group", "condition_label", "topic", "text"])
     w.writeheader()
     for r in rows:
-        w.writerow({k: r[k] for k in ["id", "account", "group", "topic", "text"]})
+        w.writerow({**{k: r[k] for k in ["id", "account", "group", "topic", "text"]},
+                    "condition_label": "rule-perturbed synthetic" if r["group"] == "mixed" else r["group"]})
 
 with open(BASE / "account_features.csv", "w", newline="", encoding="utf-8") as f:
     fields = ["account", "group", "n_posts", "ppl_mean", "ppl_var", "burstiness",
@@ -378,8 +398,8 @@ print("Accounts:", results["meta"]["n_accounts"])
 print("Composite (4-signal) AUC syn vs organic:", round(results["auc"]["composite_vs_organic"],3))
 print("Composite AUC syn vs professional:", round(results["auc"]["composite_vs_professional"],3))
 print("Composite AUC syn vs both human:", round(results["auc"]["composite_vs_both"],3))
-print("Composite AUC mixed vs organic:", round(results["auc"]["composite_mixed_vs_organic"],3))
-print("Composite AUC machine-origin vs human:", round(results["auc"]["composite_machineorigin_vs_human"],3))
+print("Composite AUC rule-perturbed vs organic:", round(results["auc"]["composite_rule_perturbed_vs_organic"],3))
+print("Composite AUC template vs simulated human:", round(results["auc"]["composite_template_vs_simulated_human"],3))
 print("With-stance sensitivity AUC:", round(results["ablation"]["with_stance_sensitivity"]["auc"],3))
 print("LogReg 5-fold CV AUC (syn vs rest):", round(results["auc"]["logreg_cv_mean"],3), "+/-", round(results["auc"]["logreg_cv_sd"],3))
 print("KMeans(k=4) silhouette:", round(sil,3), "purity:", round(purity,3), "ARI:", round(ari,3))

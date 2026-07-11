@@ -1,4 +1,4 @@
-"""figures.py -- publication figures for the CCSF simulation.
+"""figures.py -- publication figures for the Coordinated Communication Signal Fingerprinting (CCSF) simulation.
 
 Generates the six manuscript figures (300 dpi PNG; Figure 1 also as SVG) plus
 fingerprint_profiles.csv, all from results.json / arrays.npz. All plotting
@@ -34,8 +34,8 @@ R = json.load(open(BASE / "results.json"))
 A = np.load(BASE / "arrays.npz", allow_pickle=True)
 
 GROUPS = ["organic", "professional", "mixed", "synthetic"]
-LABELS = {"organic": "Organic human", "professional": "Professional advocacy",
-          "mixed": "Human-edited synthetic", "synthetic": "Synthetic (coordinated)"}
+LABELS = {"organic": "Simulated Organic", "professional": "Simulated Professional",
+          "mixed": "Rule-Perturbed Synthetic", "synthetic": "Coordinated Synthetic"}
 CMAP = {"organic": "#4C72B0", "professional": "#55A868",
         "mixed": "#C44E52", "synthetic": "#8172B3"}
 INK, GREY, PURPLE, EDGE = "#2B2F38", "#6B7280", "#6A4FA3", "#4A4F5A"
@@ -45,7 +45,7 @@ def fig_pipeline():
     """Minimal journal-style pipeline figure (canonical generator for manuscript
     Figure 1). Communicates: de-identified aggregates -> four fingerprint
     signals (stance variability exploratory only) -> composite score -> human
-    expert review; cluster-level triage, not an individual-level detector."""
+    expert review; account-level scoring intended to support subsequent campaign\n    investigation, not an individual-level detector."""
     fig, ax = plt.subplots(figsize=(8.6, 4.1))
     ax.set_xlim(0, 100); ax.set_ylim(0, 46); ax.axis("off")
     boxes = [
@@ -53,7 +53,7 @@ def fig_pipeline():
         ("De-identified\naccount-level\naggregates", "no usernames or\npost text retained", "-", EDGE),
         ("Four fingerprint\nsignals", "computed per\naccount", "-", PURPLE),
         ("Composite\nfingerprint score", "equal-weight mean\nof standardised\nsignals", "-", PURPLE),
-        ("Human expert\nreview", "high-scoring clusters\nonly; no automated\nlabelling", "--", PURPLE),
+        ("Human expert\nreview", "investigate account\npatterns; no automated\nlabelling", "--", PURPLE),
     ]
     w, gap, y0, h = 17.8, 2.4, 28.5, 16
     x = 0.6
@@ -81,7 +81,7 @@ def fig_pipeline():
             ha="center", va="center", fontsize=9.0, weight="bold", color=PURPLE)
     sigs = [("Language-model perplexity", "▼ lower", PURPLE, INK),
             ("Sentence-length burstiness", "▼ lower", PURPLE, INK),
-            ("Compliance-lexicon density", "▲ higher", PURPLE, INK),
+            ("Commercial-policy framing density", "▲ higher", PURPLE, INK),
             ("Semantic convergence", "▲ higher", PURPLE, INK),
             ("Stance variability — exploratory only, not in composite", "(at chance)", GREY, GREY)]
     yy = py + ph - 5.4
@@ -91,7 +91,7 @@ def fig_pipeline():
         ax.text(px + pw - 3.2, yy, d, ha="right", va="center", fontsize=8.6,
                 weight="bold" if dc is PURPLE else "normal", color=dc, style=ital)
         yy -= 2.85
-    ax.text(50, 2.0, "CCSF is a privacy-preserving, cluster-level triage fingerprint — not an individual-level detector.",
+    ax.text(50, 2.0, "CCSF is a data-minimising, account-level triage aid — not an individual-level detector.",
             ha="center", va="center", fontsize=8.9, style="italic", color=INK)
     plt.tight_layout()
     plt.savefig(BASE / "fig1_pipeline.png", bbox_inches="tight")
@@ -102,7 +102,7 @@ def fig_pipeline():
 def fig_features():
     feats = [("acc_ppl_mean", "Language-model perplexity\n(account mean)", False),
              ("acc_burst", "Sentence-length burstiness\n(coefficient of variation)", False),
-             ("acc_compliance", "Compliance-lexicon density", False),
+             ("acc_compliance", "Commercial-policy framing density", False),
              ("acc_conv", "Embedding-space convergence\n(mean intra-account cosine)", False)]
     acc_group = A["acc_group"]
     fig, axes = plt.subplots(2, 2, figsize=(7.2, 5.4))
@@ -118,7 +118,7 @@ def fig_features():
             x = RNG.normal(i + 1, 0.06, len(y))
             ax.scatter(x, y, s=7, color=CMAP[g], edgecolor="white", linewidth=0.3, zorder=3)
         ax.set_xticks(range(1, 5))
-        ax.set_xticklabels(["Organic", "Prof.", "Mixed", "Synth."], fontsize=8)
+        ax.set_xticklabels(["Sim.\nOrganic", "Sim.\nProfessional", "Rule-\nPerturbed", "Coordinated\nSynthetic"], fontsize=7.2)
         ax.set_title(title, fontsize=8.5)
     plt.tight_layout()
     plt.savefig(BASE / "fig2_features.png", bbox_inches="tight"); plt.close()
@@ -126,7 +126,7 @@ def fig_features():
 # ============================================================== FIG 3: fingerprint profiles
 FP_FEATS = [("acc_ppl_mean", "Perplexity\n(expected lower)"),
             ("acc_burst", "Burstiness\n(expected lower)"),
-            ("acc_compliance", "Compliance density\n(expected higher)"),
+            ("acc_compliance", "Commercial-policy framing\n(expected higher)"),
             ("acc_stance_std", "Stance variability\n(exploratory)"),
             ("acc_conv", "Semantic convergence\n(expected higher)")]
 
@@ -192,13 +192,13 @@ def fig_tsne():
 def fig_roc_ablation():
     acc_group = A["acc_group"]; anomaly = A["anomaly"]
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(7.6, 4.15))
-    targets = [("Synthetic vs organic + professional",
+    targets = [("Coordinated Synthetic vs\nSimulated Comparison Groups",
                 np.isin(acc_group, ["synthetic", "organic", "professional"]),
                 acc_group == "synthetic", "#8172B3"),
-               ("Human-edited synthetic vs organic",
+               ("Rule-Perturbed Synthetic vs\nSimulated Organic",
                 np.isin(acc_group, ["mixed", "organic"]),
                 acc_group == "mixed", "#C44E52"),
-               ("Any machine-origin vs human",
+               ("Template-Derived Synthetic vs\nSimulated Comparison Groups",
                 np.full(len(acc_group), True),
                 np.isin(acc_group, ["synthetic", "mixed"]), "#555555")]
     for name, mask, pos, c in targets:
@@ -215,7 +215,7 @@ def fig_roc_ablation():
     # exploratory stance signal; ablation (grey) bars only for composite signals
     fn4 = ["ppl_mean", "burstiness", "compliance", "convergence"]
     rows = fn4 + ["stance_std"]
-    nice = ["Perplexity", "Burstiness", "Compliance", "Convergence",
+    nice = ["Perplexity", "Burstiness", "Commercial-policy framing", "Convergence",
             "Stance variability\n(exploratory)"]
     single = [R["auc"][f"feature_{f}_vs_both"] for f in rows]
     drop = [R["ablation"][f"drop_{f}"]["auc"] for f in fn4]
@@ -248,7 +248,7 @@ def fig_nondup():
         dx, dy, ha = OFFS[g]
         ax.annotate(LABELS[g], (v["mean_jaccard"], v["mean_embed_cosine"]),
                     textcoords="offset points", xytext=(dx, dy), fontsize=7.4, ha=ha, zorder=4)
-    # dashed ellipse around the two machine-origin groups: the coordinated-
+    # dashed ellipse around the two template-derived groups: the coordinated-
     # originality signature (paraphrased but semantically aligned content)
     sj = R["nonduplication"]["synthetic"]; mj = R["nonduplication"]["mixed"]
     cxe = (sj["mean_jaccard"] + mj["mean_jaccard"]) / 2

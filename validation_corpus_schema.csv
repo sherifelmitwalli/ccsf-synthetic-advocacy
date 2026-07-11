@@ -1,0 +1,1 @@
+record_id,account_id,campaign_id,class_label,text,topic,generator_id,generator_family,generator_model,generator_revision,prompt_family,prompt_revision,temperature,diversity_setting,talking_point_repertoire,style_instruction,transformation_id,transformation_revision,evaluation_batch,split_role,seed

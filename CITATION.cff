@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 title: >-
-  Compliance-Constrained Semantic Fingerprinting (CCSF):
-  reproducibility package
+  Coordinated Communication Signal Fingerprinting (CCSF):
+  reproducibility and validation package
 message: >-
   If you use this software or synthetic dataset, please cite both the
   software (this file) and the associated manuscript.
@@ -12,11 +12,11 @@ authors:
     affiliation: "Tobacco Control Research Group, Department for Health, University of Bath, Bath, UK"
 repository-code: "https://github.com/sherifelmitwalli/ccsf-synthetic-advocacy"
 abstract: >-
-  Code and fully synthetic data for a controlled proof-of-concept study of
-  Compliance-Constrained Semantic Fingerprinting (CCSF), a privacy-preserving,
-  cluster-level method for detecting coordinated synthetic advocacy in
-  alternative nicotine delivery system (ANDS) policy discourse. All data are
-  synthetic; the package contains no real accounts or personal data.
+  Code and fully synthetic data for a controlled construct-validity baseline and
+  provenance-first independent-validation framework for Compliance-Constrained
+  Semantic Fingerprinting (CCSF), a data-minimising, account-level fingerprint
+  intended to support later cluster or campaign investigation in alternative
+  nicotine delivery system policy discourse. All bundled data are synthetic.
 keywords:
   - tobacco control
   - coordinated inauthentic behaviour
@@ -24,5 +24,5 @@ keywords:
   - public health surveillance
   - alternative nicotine delivery systems
 license: MIT
-version: "1.0.0"
-date-released: "2026-06-11"
+version: "1.1.0"
+date-released: "2026-07-11"

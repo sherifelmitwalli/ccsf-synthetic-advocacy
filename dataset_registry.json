@@ -1,0 +1,30 @@
+{
+  "baseline": {
+    "location": "baseline/",
+    "kind": "controlled construct-validity simulation",
+    "seed": 20260604,
+    "generator": "repository talking-point engine",
+    "condition_label": {
+      "mixed": "rule-perturbed synthetic"
+    },
+    "interpretation": "The baseline deliberately instantiates the regularities measured by CCSF. Its AUCs are not independent validation or operational performance estimates."
+  },
+  "independent_validation": {
+    "location": "validation_corpus.csv (not yet created)",
+    "schema": "validation_corpus_schema.csv",
+    "status": "not_run; requires executed, provenance-complete independent generator outputs",
+    "required_metadata": [
+      "generator/model/revision",
+      "prompt family/revision",
+      "topic",
+      "automated transformation/revision",
+      "seed",
+      "evaluation batch"
+    ]
+  },
+  "method": {
+    "name": "Coordinated Communication Signal Fingerprinting",
+    "acronym": "CCSF",
+    "legacy_name": "Compliance-Constrained Semantic Fingerprinting (historical documentation only)"
+  }
+}
