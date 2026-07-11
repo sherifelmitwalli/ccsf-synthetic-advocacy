@@ -26,10 +26,7 @@ A held-out multigenerator stress test was executed on 2026-07-11 at a preliminar
 | `dataset_registry.json` | Status and provenance of the baseline and independent-validation datasets. |
 | `verify_outputs.py` | Verifies baseline invariants and the independent-validation framework state. |
 | `stage2_derived_analysis.py` | Versioned derivative analyses over the frozen Stage 2 outputs (coefficients, development-only thresholds, calibration summary, equivalent-group transformation contrasts, Stage 2 coordinated-originality test). Writes `stage2_outputs/derived_v1/`; no generation, no API calls. |
-| `stage2_figures_v2.py` | Revised manuscript and appendix figures from frozen + derived outputs (writes `stage2_outputs/derived_v1/figures/`). |
-| `build_r3_docx.py` | Builds the R3 submission DOCX and Multimedia Appendix 7 from the clean manuscript markdown. |
-| `verify_stage2_manuscript.py` | Traces every headline R3 manuscript value to frozen or versioned machine-readable outputs; asserts the derived refit matches the frozen evaluation exactly. |
-| `MANUSCRIPT_REVISION_NOTES.md` | Deferred manuscript notes and claim-audit guidance. |
+| `stage2_figures_v2.py` | Revised figures from frozen + derived outputs (writes `stage2_outputs/derived_v1/figures/`). |
 
 ## Terminology
 
@@ -66,7 +63,7 @@ Do not use random folds as the principal generalisation evidence. The generated 
 python verify_outputs.py
 ```
 
-This validates the archived baseline (Stage 1). `verify_stage2_manuscript.py` and the Stage 2 checks verify the executed multigenerator analysis against frozen `stage2_outputs/`.
+This validates the archived baseline (Stage 1). Stage 2 checks in `stage2_run.py` verify the executed multigenerator analysis against frozen `stage2_outputs/`.
 
 ## Legacy mappings
 
