@@ -139,7 +139,7 @@ def build_leave_one_condition_out(records: Iterable[dict[str, str]], field: str)
         labels = {r["class_label"] for r in accounts if r["account_id"] in test}
         if labels != VALID_CLASS_LABELS:
             raise ProvenanceError(
-                f"Held-out {field}={held_out!r} lacks both classes. Assign matched human-control "
+                f"Held-out {field}={held_out!r} lacks both classes. Assign matched comparison-control "
                 "accounts to each evaluation batch/condition before evaluation."
             )
         splits.append({"holdout_field": field, "held_out_value": held_out,
