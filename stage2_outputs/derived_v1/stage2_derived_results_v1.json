@@ -1,0 +1,694 @@
+{
+  "version": "derived_v1",
+  "seed": 20260604,
+  "inputs": [
+    "stage2_outputs/stage2_account_features.csv",
+    "stage2_outputs/stage2_validation_corpus.csv",
+    "stage2_outputs/stage2_splits/leave_one_generator_id_out.json",
+    "stage2_outputs/stage2_eval_leave_one_generator_id_out.json"
+  ],
+  "frozen_consistency_checks": {
+    "gemini_flash_lite": {
+      "recomputed_roc_auc": 0.803125,
+      "frozen_roc_auc": 0.803125,
+      "abs_diff": 0.0
+    },
+    "qwen_3_6_35b": {
+      "recomputed_roc_auc": 0.878125,
+      "frozen_roc_auc": 0.878125,
+      "abs_diff": 0.0
+    },
+    "seed_2_mini": {
+      "recomputed_roc_auc": 0.7109375,
+      "frozen_roc_auc": 0.7109375,
+      "abs_diff": 0.0
+    }
+  },
+  "fixed_composite": {
+    "description": "Stage 1 fixed-direction equal-weight composite applied to Stage 2 accounts without retraining (z-scored across all 156 Stage 2 accounts).",
+    "pooled": {
+      "n": 156,
+      "roc_auc": 0.39409722222222227,
+      "roc_auc_ci": [
+        0.31006510416666666,
+        0.480915798611111
+      ]
+    },
+    "pooled_vs_organic_only": {
+      "n": 120,
+      "roc_auc": 0.6172222222222222,
+      "roc_auc_ci": [
+        0.5119444444444445,
+        0.7172361111111111
+      ]
+    },
+    "per_family": {
+      "alibaba_qwen": {
+        "n": 52,
+        "roc_auc": 0.4484375,
+        "roc_auc_ci": [
+          0.3015234375,
+          0.6031249999999999
+        ]
+      },
+      "bytedance_seed": {
+        "n": 52,
+        "roc_auc": 0.41874999999999996,
+        "roc_auc_ci": [
+          0.2625,
+          0.5812890624999998
+        ]
+      },
+      "google_gemini": {
+        "n": 52,
+        "roc_auc": 0.33125000000000004,
+        "roc_auc_ci": [
+          0.1983984375,
+          0.48437499999999994
+        ]
+      }
+    }
+  },
+  "signal_transfer": {
+    "description": "Per-feature Stage 2 transfer: group means (SD) by account role and oriented single-feature ROC AUCs (orientation fixed by the Stage 1 hypothesis).",
+    "features": {
+      "ppl_mean": {
+        "orientation": "higher-composite when lower",
+        "means": {
+          "coordinated": {
+            "mean": 135.4102219787247,
+            "sd": 111.67557090615084
+          },
+          "organic": {
+            "mean": 116.81271774761787,
+            "sd": 83.47941347382915
+          },
+          "professional": {
+            "mean": 69.11214436232078,
+            "sd": 26.620723861064747
+          }
+        },
+        "oriented_auc_vs_organic": {
+          "value": 0.5147222222222223,
+          "ci": [
+            0.40611111111111114,
+            0.6130694444444443
+          ]
+        },
+        "oriented_auc_vs_all_controls": {
+          "value": 0.42899305555555556,
+          "ci": [
+            0.3402734375,
+            0.520855034722222
+          ]
+        },
+        "oriented_auc_vs_professional": {
+          "value": 0.28611111111111115,
+          "ci": [
+            0.18796296296296294,
+            0.39166666666666666
+          ]
+        }
+      },
+      "burstiness": {
+        "orientation": "higher-composite when lower",
+        "means": {
+          "coordinated": {
+            "mean": 0.36306267678673154,
+            "sd": 0.07937818589294274
+          },
+          "organic": {
+            "mean": 0.4674374900861108,
+            "sd": 0.10016334986255505
+          },
+          "professional": {
+            "mean": 0.3660377076733855,
+            "sd": 0.15221301581487678
+          }
+        },
+        "oriented_auc_vs_organic": {
+          "value": 0.8136111111111111,
+          "ci": [
+            0.7349930555555555,
+            0.885847222222222
+          ]
+        },
+        "oriented_auc_vs_all_controls": {
+          "value": 0.6819444444444445,
+          "ci": [
+            0.5959982638888889,
+            0.7656380208333332
+          ]
+        },
+        "oriented_auc_vs_professional": {
+          "value": 0.4625,
+          "ci": [
+            0.32684027777777774,
+            0.5981712962962962
+          ]
+        }
+      },
+      "commercial_policy_framing": {
+        "orientation": "higher-composite when higher",
+        "means": {
+          "coordinated": {
+            "mean": 0.006030755766145994,
+            "sd": 0.004830116593336318
+          },
+          "organic": {
+            "mean": 0.0014384074755136532,
+            "sd": 0.002600400287720336
+          },
+          "professional": {
+            "mean": 0.07937411524746753,
+            "sd": 0.028810398513238487
+          }
+        },
+        "oriented_auc_vs_organic": {
+          "value": 0.8245833333333333,
+          "ci": [
+            0.7441631944444446,
+            0.8930555555555554
+          ]
+        },
+        "oriented_auc_vs_all_controls": {
+          "value": 0.5153645833333333,
+          "ci": [
+            0.4260264756944444,
+            0.6078190104166666
+          ]
+        },
+        "oriented_auc_vs_professional": {
+          "value": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "convergence": {
+        "orientation": "higher-composite when higher",
+        "means": {
+          "coordinated": {
+            "mean": 0.5024901444713274,
+            "sd": 0.09676522617453137
+          },
+          "organic": {
+            "mean": 0.5348522047201792,
+            "sd": 0.08888798131483044
+          },
+          "professional": {
+            "mean": 0.7507612903912863,
+            "sd": 0.05608379619411105
+          }
+        },
+        "oriented_auc_vs_organic": {
+          "value": 0.40166666666666667,
+          "ci": [
+            0.30083333333333334,
+            0.5047361111111109
+          ]
+        },
+        "oriented_auc_vs_all_controls": {
+          "value": 0.25243055555555555,
+          "ci": [
+            0.1827994791666667,
+            0.3248350694444444
+          ]
+        },
+        "oriented_auc_vs_professional": {
+          "value": 0.003703703703703705,
+          "ci": [
+            0.0,
+            0.0125
+          ]
+        }
+      }
+    }
+  },
+  "logo_coefficients": {
+    "description": "Standardized logistic coefficients (per SD of each development-fitted feature) for each leave-one-generator-family-out split, with development-account stratified bootstrap 95% percentile CIs. Positive = higher value increases predicted coordination probability.",
+    "splits": {
+      "gemini_flash_lite": {
+        "n_dev_accounts": 104,
+        "intercept": -0.5782931417920179,
+        "coefficients": {
+          "ppl_mean": -0.08160992946828943,
+          "burstiness": -1.336175151409331,
+          "commercial_policy_framing": -1.608372375225401,
+          "convergence": -0.5551479094350281
+        },
+        "bootstrap_ci": {
+          "ppl_mean": [
+            -0.4947652178897428,
+            0.38362964573471625
+          ],
+          "burstiness": [
+            -2.187847431707601,
+            -0.6841989930396447
+          ],
+          "commercial_policy_framing": [
+            -2.363519709015613,
+            -0.8752930560342376
+          ],
+          "convergence": [
+            -1.2152969318042661,
+            0.03309160990358387
+          ]
+        }
+      },
+      "qwen_3_6_35b": {
+        "n_dev_accounts": 104,
+        "intercept": -0.29026601845579625,
+        "coefficients": {
+          "ppl_mean": 0.033881308265833986,
+          "burstiness": -0.6786017175032828,
+          "commercial_policy_framing": -0.8184062999755055,
+          "convergence": -0.7033168381895463
+        },
+        "bootstrap_ci": {
+          "ppl_mean": [
+            -0.39734662950146155,
+            0.538775016291137
+          ],
+          "burstiness": [
+            -1.4672129857703378,
+            -0.10237026466558902
+          ],
+          "commercial_policy_framing": [
+            -1.503429929987105,
+            -0.30040099373654766
+          ],
+          "convergence": [
+            -1.4038400714636106,
+            -0.0910149194846666
+          ]
+        }
+      },
+      "seed_2_mini": {
+        "n_dev_accounts": 104,
+        "intercept": -0.5283110007716111,
+        "coefficients": {
+          "ppl_mean": 0.32267501482518357,
+          "burstiness": -1.5344898998579393,
+          "commercial_policy_framing": -1.0550690452516718,
+          "convergence": -0.7029270680567413
+        },
+        "bootstrap_ci": {
+          "ppl_mean": [
+            -0.029491847392076415,
+            0.7964630368581036
+          ],
+          "burstiness": [
+            -2.2132318791317833,
+            -1.0250485996440901
+          ],
+          "commercial_policy_framing": [
+            -1.6729378927306784,
+            -0.3852082286524061
+          ],
+          "convergence": [
+            -1.412017518810268,
+            -0.08189726580780511
+          ]
+        }
+      }
+    }
+  },
+  "dev_only_threshold": {
+    "description": "Development-only operating threshold: Youden J maximized on 5-fold out-of-fold development predictions, then applied unchanged to the held-out family. The held-out family contributes nothing to threshold choice. Reported alongside the default 0.5 threshold.",
+    "splits": {
+      "gemini_flash_lite": {
+        "dev_youden_threshold": 0.592432683200837,
+        "dev_oof_youden_j": 0.6031249999999999,
+        "held_out": {
+          "dev_selected": {
+            "threshold": 0.592432683200837,
+            "sensitivity": 0.95,
+            "specificity": 0.625,
+            "precision": 0.6129032258064516,
+            "f1": 0.7450980392156863,
+            "confusion_matrix": {
+              "tn": 20,
+              "fp": 12,
+              "fn": 1,
+              "tp": 19
+            }
+          },
+          "default_0.5": {
+            "threshold": 0.5,
+            "sensitivity": 1.0,
+            "specificity": 0.46875,
+            "precision": 0.5405405405405406,
+            "f1": 0.7017543859649122,
+            "confusion_matrix": {
+              "tn": 15,
+              "fp": 17,
+              "fn": 0,
+              "tp": 20
+            }
+          }
+        }
+      },
+      "qwen_3_6_35b": {
+        "dev_youden_threshold": 0.46152636086748017,
+        "dev_oof_youden_j": 0.44999999999999996,
+        "held_out": {
+          "dev_selected": {
+            "threshold": 0.46152636086748017,
+            "sensitivity": 0.85,
+            "specificity": 0.6875,
+            "precision": 0.6296296296296297,
+            "f1": 0.723404255319149,
+            "confusion_matrix": {
+              "tn": 22,
+              "fp": 10,
+              "fn": 3,
+              "tp": 17
+            }
+          },
+          "default_0.5": {
+            "threshold": 0.5,
+            "sensitivity": 0.8,
+            "specificity": 0.6875,
+            "precision": 0.6153846153846154,
+            "f1": 0.6956521739130435,
+            "confusion_matrix": {
+              "tn": 22,
+              "fp": 10,
+              "fn": 4,
+              "tp": 16
+            }
+          }
+        }
+      },
+      "seed_2_mini": {
+        "dev_youden_threshold": 0.46103044783131175,
+        "dev_oof_youden_j": 0.6656249999999999,
+        "held_out": {
+          "dev_selected": {
+            "threshold": 0.46103044783131175,
+            "sensitivity": 0.65,
+            "specificity": 0.59375,
+            "precision": 0.5,
+            "f1": 0.5652173913043478,
+            "confusion_matrix": {
+              "tn": 19,
+              "fp": 13,
+              "fn": 7,
+              "tp": 13
+            }
+          },
+          "default_0.5": {
+            "threshold": 0.5,
+            "sensitivity": 0.65,
+            "specificity": 0.6875,
+            "precision": 0.5652173913043478,
+            "f1": 0.6046511627906976,
+            "confusion_matrix": {
+              "tn": 22,
+              "fp": 10,
+              "fn": 7,
+              "tp": 13
+            }
+          }
+        }
+      }
+    }
+  },
+  "calibration": {
+    "description": "Brier scores and quantile calibration bins copied verbatim from the frozen leave-one-generator-family-out evaluation output (stage2_eval_leave_one_generator_id_out.json).",
+    "splits": {
+      "gemini_flash_lite": {
+        "brier_score": 0.20638234594775987,
+        "calibration_bins": [
+          {
+            "mean_predicted": 0.10608495579790045,
+            "fraction_positive": 0.0
+          },
+          {
+            "mean_predicted": 0.43521675511208413,
+            "fraction_positive": 0.1
+          },
+          {
+            "mean_predicted": 0.6766220018788286,
+            "fraction_positive": 0.6
+          },
+          {
+            "mean_predicted": 0.8091599996202652,
+            "fraction_positive": 0.7
+          },
+          {
+            "mean_predicted": 0.8815941644161994,
+            "fraction_positive": 0.5454545454545454
+          }
+        ]
+      },
+      "qwen_3_6_35b": {
+        "brier_score": 0.14838218042855802,
+        "calibration_bins": [
+          {
+            "mean_predicted": 0.03536932879282003,
+            "fraction_positive": 0.0
+          },
+          {
+            "mean_predicted": 0.2806639067383146,
+            "fraction_positive": 0.2
+          },
+          {
+            "mean_predicted": 0.4952567551390262,
+            "fraction_positive": 0.4
+          },
+          {
+            "mean_predicted": 0.6379106929014151,
+            "fraction_positive": 0.4
+          },
+          {
+            "mean_predicted": 0.8026452935311852,
+            "fraction_positive": 0.9090909090909091
+          }
+        ]
+      },
+      "seed_2_mini": {
+        "brier_score": 0.2169089317118819,
+        "calibration_bins": [
+          {
+            "mean_predicted": 0.054218503956313675,
+            "fraction_positive": 0.18181818181818182
+          },
+          {
+            "mean_predicted": 0.24449878356656501,
+            "fraction_positive": 0.3
+          },
+          {
+            "mean_predicted": 0.45995897379382,
+            "fraction_positive": 0.3
+          },
+          {
+            "mean_predicted": 0.6182842028792528,
+            "fraction_positive": 0.4
+          },
+          {
+            "mean_predicted": 0.8191899968155171,
+            "fraction_positive": 0.7272727272727273
+          }
+        ]
+      }
+    }
+  },
+  "transformation_equivalent_groups": {
+    "description": "Coordinated-vs-organic ROC AUC of the held-out-family predictions within each transformation cell, using EQUIVALENT groups: professional controls are excluded everywhere, so every cell (including the untransformed cell) contains 5 coordinated and 5 organic accounts per family (15 vs 15 pooled). Per-family values are exploratory point estimates; pooled values are descriptive summaries of out-of-family predictions with stratified bootstrap CIs (no refitting).",
+    "per_family": {
+      "alibaba_qwen": {
+        "none": {
+          "n": 10,
+          "n_coordinated": 5,
+          "n_organic": 5,
+          "roc_auc": 0.6799999999999999
+        },
+        "llm_paraphrase": {
+          "n": 10,
+          "n_coordinated": 5,
+          "n_organic": 5,
+          "roc_auc": 1.0
+        },
+        "noise_insertion": {
+          "n": 10,
+          "n_coordinated": 5,
+          "n_organic": 5,
+          "roc_auc": 0.5599999999999999
+        },
+        "sentence_restructure": {
+          "n": 10,
+          "n_coordinated": 5,
+          "n_organic": 5,
+          "roc_auc": 1.0
+        }
+      },
+      "bytedance_seed": {
+        "none": {
+          "n": 10,
+          "n_coordinated": 5,
+          "n_organic": 5,
+          "roc_auc": 0.6400000000000001
+        },
+        "llm_paraphrase": {
+          "n": 10,
+          "n_coordinated": 5,
+          "n_organic": 5,
+          "roc_auc": 0.84
+        },
+        "noise_insertion": {
+          "n": 10,
+          "n_coordinated": 5,
+          "n_organic": 5,
+          "roc_auc": 0.8
+        },
+        "sentence_restructure": {
+          "n": 10,
+          "n_coordinated": 5,
+          "n_organic": 5,
+          "roc_auc": 0.6
+        }
+      },
+      "google_gemini": {
+        "none": {
+          "n": 10,
+          "n_coordinated": 5,
+          "n_organic": 5,
+          "roc_auc": 0.4
+        },
+        "llm_paraphrase": {
+          "n": 10,
+          "n_coordinated": 5,
+          "n_organic": 5,
+          "roc_auc": 0.92
+        },
+        "noise_insertion": {
+          "n": 10,
+          "n_coordinated": 5,
+          "n_organic": 5,
+          "roc_auc": 0.48
+        },
+        "sentence_restructure": {
+          "n": 10,
+          "n_coordinated": 5,
+          "n_organic": 5,
+          "roc_auc": 0.76
+        }
+      }
+    },
+    "pooled": {
+      "none": {
+        "n": 30,
+        "roc_auc": 0.5644444444444444,
+        "roc_auc_ci": [
+          0.3377777777777778,
+          0.7777777777777778
+        ]
+      },
+      "llm_paraphrase": {
+        "n": 30,
+        "roc_auc": 0.9155555555555556,
+        "roc_auc_ci": [
+          0.7911111111111111,
+          1.0
+        ]
+      },
+      "noise_insertion": {
+        "n": 30,
+        "roc_auc": 0.6266666666666667,
+        "roc_auc_ci": [
+          0.40888888888888886,
+          0.8222222222222222
+        ]
+      },
+      "sentence_restructure": {
+        "n": 30,
+        "roc_auc": 0.7422222222222222,
+        "roc_auc_ci": [
+          0.5466666666666666,
+          0.9156666666666661
+        ]
+      }
+    }
+  },
+  "coordinated_originality_stage2": {
+    "description": "Stage 2 test of the Stage 1 'coordinated originality' signature (campaign-level semantic alignment without lexical duplication). Groups: each coordinated campaign, and the organic-style and professional controls, within each generator family. Same lexical tokenizer and pair cap as Stage 1 analysis.py.",
+    "embedding_note": "semantic cosine computed with all-MiniLM-L6-v2 (same instrument as Stage 1)",
+    "groups": {
+      "alibaba_qwen::organic": {
+        "n_posts": 160,
+        "mean_jaccard": 0.09321744139144225,
+        "max_jaccard": 0.275,
+        "mean_embed_cosine": 0.3761383295059204
+      },
+      "alibaba_qwen::professional": {
+        "n_posts": 96,
+        "mean_jaccard": 0.18370191231645921,
+        "max_jaccard": 0.352112676056338,
+        "mean_embed_cosine": 0.7240081429481506
+      },
+      "alibaba_qwen::qwen_3_6_35b_camp0": {
+        "n_posts": 80,
+        "mean_jaccard": 0.1165887287134034,
+        "max_jaccard": 0.345679012345679,
+        "mean_embed_cosine": 0.5458832383155823
+      },
+      "alibaba_qwen::qwen_3_6_35b_camp1": {
+        "n_posts": 80,
+        "mean_jaccard": 0.07394105997343571,
+        "max_jaccard": 0.2714285714285714,
+        "mean_embed_cosine": 0.41844746470451355
+      },
+      "bytedance_seed::organic": {
+        "n_posts": 160,
+        "mean_jaccard": 0.08318293962828363,
+        "max_jaccard": 0.30434782608695654,
+        "mean_embed_cosine": 0.4380098581314087
+      },
+      "bytedance_seed::professional": {
+        "n_posts": 96,
+        "mean_jaccard": 0.1485051536621476,
+        "max_jaccard": 0.38461538461538464,
+        "mean_embed_cosine": 0.6701352000236511
+      },
+      "bytedance_seed::seed_2_mini_camp0": {
+        "n_posts": 80,
+        "mean_jaccard": 0.11056079397808492,
+        "max_jaccard": 0.38461538461538464,
+        "mean_embed_cosine": 0.5665963888168335
+      },
+      "bytedance_seed::seed_2_mini_camp1": {
+        "n_posts": 80,
+        "mean_jaccard": 0.07580038452430032,
+        "max_jaccard": 0.3387096774193548,
+        "mean_embed_cosine": 0.5121655464172363
+      },
+      "google_gemini::gemini_flash_lite_camp0": {
+        "n_posts": 80,
+        "mean_jaccard": 0.1204636577416004,
+        "max_jaccard": 0.375,
+        "mean_embed_cosine": 0.5529270768165588
+      },
+      "google_gemini::gemini_flash_lite_camp1": {
+        "n_posts": 80,
+        "mean_jaccard": 0.06936463545849027,
+        "max_jaccard": 0.3125,
+        "mean_embed_cosine": 0.42764633893966675
+      },
+      "google_gemini::organic": {
+        "n_posts": 160,
+        "mean_jaccard": 0.09319877001097257,
+        "max_jaccard": 0.1875,
+        "mean_embed_cosine": 0.40633031725883484
+      },
+      "google_gemini::professional": {
+        "n_posts": 96,
+        "mean_jaccard": 0.14244218506663764,
+        "max_jaccard": 0.31343283582089554,
+        "mean_embed_cosine": 0.6224259734153748
+      }
+    }
+  }
+}

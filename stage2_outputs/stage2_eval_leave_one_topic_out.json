@@ -1,0 +1,516 @@
+{
+  "unit": "account",
+  "feature_columns": [
+    "ppl_mean",
+    "burstiness",
+    "commercial_policy_framing",
+    "convergence"
+  ],
+  "holdout_field": "topic",
+  "splits": [
+    {
+      "held_out_value": "advertising and promotion rules for vaping products",
+      "n": 24,
+      "threshold": 0.5,
+      "roc_auc": 0.8,
+      "pr_auc": 0.6986391694725027,
+      "sensitivity": 0.8888888888888888,
+      "specificity": 0.6666666666666666,
+      "precision": 0.6153846153846154,
+      "recall": 0.8888888888888888,
+      "f1": 0.7272727272727273,
+      "confusion_matrix": {
+        "tn": 10,
+        "fp": 5,
+        "fn": 1,
+        "tp": 8
+      },
+      "brier_score": 0.17724141703374544,
+      "roc_auc_ci": [
+        0.5998148148148148,
+        0.9555555555555556
+      ],
+      "pr_auc_ci": [
+        0.5059197610668199,
+        0.9301146384479717
+      ],
+      "calibration_bins": [
+        {
+          "mean_predicted": 0.047485246428038766,
+          "fraction_positive": 0.0
+        },
+        {
+          "mean_predicted": 0.25954537127403504,
+          "fraction_positive": 0.2
+        },
+        {
+          "mean_predicted": 0.5623139254072126,
+          "fraction_positive": 0.5
+        },
+        {
+          "mean_predicted": 0.7022438644853107,
+          "fraction_positive": 0.6
+        },
+        {
+          "mean_predicted": 0.8398923016901716,
+          "fraction_positive": 0.6
+        }
+      ],
+      "prevalence_scenarios": {
+        "0.01": {
+          "ppv": 0.02622950819672131,
+          "false_discovery_rate": 0.9737704918032787
+        },
+        "0.05": {
+          "ppv": 0.12307692307692307,
+          "false_discovery_rate": 0.8769230769230769
+        },
+        "0.1": {
+          "ppv": 0.22857142857142854,
+          "false_discovery_rate": 0.7714285714285715
+        }
+      }
+    },
+    {
+      "held_out_value": "enforcement of youth access laws for vaping products",
+      "n": 15,
+      "threshold": 0.5,
+      "roc_auc": 0.6481481481481481,
+      "pr_auc": 0.4958694083694084,
+      "sensitivity": 0.6666666666666666,
+      "specificity": 0.6666666666666666,
+      "precision": 0.5714285714285714,
+      "recall": 0.6666666666666666,
+      "f1": 0.6153846153846154,
+      "confusion_matrix": {
+        "tn": 6,
+        "fp": 3,
+        "fn": 2,
+        "tp": 4
+      },
+      "brier_score": 0.24618784328659887,
+      "roc_auc_ci": [
+        0.35185185185185186,
+        0.9074074074074074
+      ],
+      "pr_auc_ci": [
+        0.38089451058201057,
+        0.8688050144300138
+      ],
+      "calibration_bins": [
+        {
+          "mean_predicted": 0.11150930076547765,
+          "fraction_positive": 0.0
+        },
+        {
+          "mean_predicted": 0.34668051127526417,
+          "fraction_positive": 0.3333333333333333
+        },
+        {
+          "mean_predicted": 0.48724449539040293,
+          "fraction_positive": 0.6666666666666666
+        },
+        {
+          "mean_predicted": 0.5271512799340473,
+          "fraction_positive": 0.6666666666666666
+        },
+        {
+          "mean_predicted": 0.7386270694181111,
+          "fraction_positive": 0.3333333333333333
+        }
+      ],
+      "prevalence_scenarios": {
+        "0.01": {
+          "ppv": 0.019801980198019802,
+          "false_discovery_rate": 0.9801980198019802
+        },
+        "0.05": {
+          "ppv": 0.09523809523809523,
+          "false_discovery_rate": 0.9047619047619048
+        },
+        "0.1": {
+          "ppv": 0.1818181818181818,
+          "false_discovery_rate": 0.8181818181818182
+        }
+      }
+    },
+    {
+      "held_out_value": "flavour restrictions for nicotine vaping products",
+      "n": 24,
+      "threshold": 0.5,
+      "roc_auc": 0.8074074074074075,
+      "pr_auc": 0.7719072392985437,
+      "sensitivity": 0.6666666666666666,
+      "specificity": 0.8,
+      "precision": 0.6666666666666666,
+      "recall": 0.6666666666666666,
+      "f1": 0.6666666666666666,
+      "confusion_matrix": {
+        "tn": 12,
+        "fp": 3,
+        "fn": 3,
+        "tp": 6
+      },
+      "brier_score": 0.17557585660563424,
+      "roc_auc_ci": [
+        0.5777777777777777,
+        0.9851851851851852
+      ],
+      "pr_auc_ci": [
+        0.5658895502645502,
+        0.9797979797979797
+      ],
+      "calibration_bins": [
+        {
+          "mean_predicted": 0.04379725155652926,
+          "fraction_positive": 0.2
+        },
+        {
+          "mean_predicted": 0.23234800581204446,
+          "fraction_positive": 0.0
+        },
+        {
+          "mean_predicted": 0.4207926926845938,
+          "fraction_positive": 0.25
+        },
+        {
+          "mean_predicted": 0.5307019688532228,
+          "fraction_positive": 0.6
+        },
+        {
+          "mean_predicted": 0.7273707941227434,
+          "fraction_positive": 0.8
+        }
+      ],
+      "prevalence_scenarios": {
+        "0.01": {
+          "ppv": 0.03257328990228014,
+          "false_discovery_rate": 0.9674267100977199
+        },
+        "0.05": {
+          "ppv": 0.14925373134328362,
+          "false_discovery_rate": 0.8507462686567164
+        },
+        "0.1": {
+          "ppv": 0.2702702702702703,
+          "false_discovery_rate": 0.7297297297297297
+        }
+      }
+    },
+    {
+      "held_out_value": "product safety and manufacturing standards for vaping devices",
+      "n": 15,
+      "threshold": 0.5,
+      "roc_auc": 0.7592592592592592,
+      "pr_auc": 0.7611823361823361,
+      "sensitivity": 0.8333333333333334,
+      "specificity": 0.3333333333333333,
+      "precision": 0.45454545454545453,
+      "recall": 0.8333333333333334,
+      "f1": 0.5882352941176471,
+      "confusion_matrix": {
+        "tn": 3,
+        "fp": 6,
+        "fn": 1,
+        "tp": 5
+      },
+      "brier_score": 0.24896254662021602,
+      "roc_auc_ci": [
+        0.4444444444444445,
+        0.981944444444442
+      ],
+      "pr_auc_ci": [
+        0.5277777777777778,
+        0.976785714285711
+      ],
+      "calibration_bins": [
+        {
+          "mean_predicted": 0.20683736459142996,
+          "fraction_positive": 0.3333333333333333
+        },
+        {
+          "mean_predicted": 0.4645947867277891,
+          "fraction_positive": 0.0
+        },
+        {
+          "mean_predicted": 0.623065046981076,
+          "fraction_positive": 0.3333333333333333
+        },
+        {
+          "mean_predicted": 0.7494010021978701,
+          "fraction_positive": 0.6666666666666666
+        },
+        {
+          "mean_predicted": 0.8469984003403569,
+          "fraction_positive": 0.6666666666666666
+        }
+      ],
+      "prevalence_scenarios": {
+        "0.01": {
+          "ppv": 0.012468827930174564,
+          "false_discovery_rate": 0.9875311720698254
+        },
+        "0.05": {
+          "ppv": 0.0617283950617284,
+          "false_discovery_rate": 0.9382716049382716
+        },
+        "0.1": {
+          "ppv": 0.12195121951219512,
+          "false_discovery_rate": 0.8780487804878049
+        }
+      }
+    },
+    {
+      "held_out_value": "retail licensing for nicotine product sellers",
+      "n": 24,
+      "threshold": 0.5,
+      "roc_auc": 0.8518518518518519,
+      "pr_auc": 0.8370709537376204,
+      "sensitivity": 0.7777777777777778,
+      "specificity": 0.7333333333333333,
+      "precision": 0.6363636363636364,
+      "recall": 0.7777777777777778,
+      "f1": 0.7,
+      "confusion_matrix": {
+        "tn": 11,
+        "fp": 4,
+        "fn": 2,
+        "tp": 7
+      },
+      "brier_score": 0.1534252155969035,
+      "roc_auc_ci": [
+        0.6592592592592593,
+        0.9925925925925926
+      ],
+      "pr_auc_ci": [
+        0.6485251322751322,
+        0.9888888888888889
+      ],
+      "calibration_bins": [
+        {
+          "mean_predicted": 0.05649511794599695,
+          "fraction_positive": 0.2
+        },
+        {
+          "mean_predicted": 0.25533753443700286,
+          "fraction_positive": 0.0
+        },
+        {
+          "mean_predicted": 0.4684302251395899,
+          "fraction_positive": 0.25
+        },
+        {
+          "mean_predicted": 0.6167899811908488,
+          "fraction_positive": 0.6
+        },
+        {
+          "mean_predicted": 0.8171273795205304,
+          "fraction_positive": 0.8
+        }
+      ],
+      "prevalence_scenarios": {
+        "0.01": {
+          "ppv": 0.02861815208503679,
+          "false_discovery_rate": 0.9713818479149632
+        },
+        "0.05": {
+          "ppv": 0.13307984790874522,
+          "false_discovery_rate": 0.8669201520912548
+        },
+        "0.1": {
+          "ppv": 0.2447552447552447,
+          "false_discovery_rate": 0.7552447552447553
+        }
+      }
+    },
+    {
+      "held_out_value": "taxation of alternative nicotine products",
+      "n": 24,
+      "threshold": 0.5,
+      "roc_auc": 0.9703703703703704,
+      "pr_auc": 0.9658119658119658,
+      "sensitivity": 1.0,
+      "specificity": 0.6666666666666666,
+      "precision": 0.6428571428571429,
+      "recall": 1.0,
+      "f1": 0.782608695652174,
+      "confusion_matrix": {
+        "tn": 10,
+        "fp": 5,
+        "fn": 0,
+        "tp": 9
+      },
+      "brier_score": 0.10665892896617535,
+      "roc_auc_ci": [
+        0.8814814814814815,
+        1.0
+      ],
+      "pr_auc_ci": [
+        0.8809523809523809,
+        1.0
+      ],
+      "calibration_bins": [
+        {
+          "mean_predicted": 0.019631758757906854,
+          "fraction_positive": 0.0
+        },
+        {
+          "mean_predicted": 0.25725980901145623,
+          "fraction_positive": 0.0
+        },
+        {
+          "mean_predicted": 0.5589511122773264,
+          "fraction_positive": 0.25
+        },
+        {
+          "mean_predicted": 0.7423753389797809,
+          "fraction_positive": 0.6
+        },
+        {
+          "mean_predicted": 0.8693515513846026,
+          "fraction_positive": 1.0
+        }
+      ],
+      "prevalence_scenarios": {
+        "0.01": {
+          "ppv": 0.029411764705882353,
+          "false_discovery_rate": 0.9705882352941176
+        },
+        "0.05": {
+          "ppv": 0.13636363636363635,
+          "false_discovery_rate": 0.8636363636363636
+        },
+        "0.1": {
+          "ppv": 0.25,
+          "false_discovery_rate": 0.75
+        }
+      }
+    },
+    {
+      "held_out_value": "the role of vaping products in smoking cessation services",
+      "n": 15,
+      "threshold": 0.5,
+      "roc_auc": 0.8703703703703703,
+      "pr_auc": 0.7166666666666667,
+      "sensitivity": 0.8333333333333334,
+      "specificity": 0.8888888888888888,
+      "precision": 0.8333333333333334,
+      "recall": 0.8333333333333334,
+      "f1": 0.8333333333333334,
+      "confusion_matrix": {
+        "tn": 8,
+        "fp": 1,
+        "fn": 1,
+        "tp": 5
+      },
+      "brier_score": 0.1409437115295917,
+      "roc_auc_ci": [
+        0.6481481481481481,
+        1.0
+      ],
+      "pr_auc_ci": [
+        0.5140873015873015,
+        1.0
+      ],
+      "calibration_bins": [
+        {
+          "mean_predicted": 0.061046728917735806,
+          "fraction_positive": 0.0
+        },
+        {
+          "mean_predicted": 0.22012604597563368,
+          "fraction_positive": 0.0
+        },
+        {
+          "mean_predicted": 0.36041157272576924,
+          "fraction_positive": 0.3333333333333333
+        },
+        {
+          "mean_predicted": 0.5584534031277087,
+          "fraction_positive": 1.0
+        },
+        {
+          "mean_predicted": 0.777618114705303,
+          "fraction_positive": 0.6666666666666666
+        }
+      ],
+      "prevalence_scenarios": {
+        "0.01": {
+          "ppv": 0.07042253521126758,
+          "false_discovery_rate": 0.9295774647887324
+        },
+        "0.05": {
+          "ppv": 0.2830188679245283,
+          "false_discovery_rate": 0.7169811320754718
+        },
+        "0.1": {
+          "ppv": 0.4545454545454544,
+          "false_discovery_rate": 0.5454545454545456
+        }
+      }
+    },
+    {
+      "held_out_value": "use of vaping products in public places",
+      "n": 15,
+      "threshold": 0.5,
+      "roc_auc": 0.9444444444444444,
+      "pr_auc": 0.9305555555555556,
+      "sensitivity": 1.0,
+      "specificity": 0.7777777777777778,
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.8571428571428571,
+      "confusion_matrix": {
+        "tn": 7,
+        "fp": 2,
+        "fn": 0,
+        "tp": 6
+      },
+      "brier_score": 0.11806088474736187,
+      "roc_auc_ci": [
+        0.8148148148148148,
+        1.0
+      ],
+      "pr_auc_ci": [
+        0.7952380952380952,
+        1.0
+      ],
+      "calibration_bins": [
+        {
+          "mean_predicted": 0.046766197019798096,
+          "fraction_positive": 0.0
+        },
+        {
+          "mean_predicted": 0.19569544306049566,
+          "fraction_positive": 0.0
+        },
+        {
+          "mean_predicted": 0.5725828533892705,
+          "fraction_positive": 0.3333333333333333
+        },
+        {
+          "mean_predicted": 0.7996353872527394,
+          "fraction_positive": 0.6666666666666666
+        },
+        {
+          "mean_predicted": 0.8652324916482735,
+          "fraction_positive": 1.0
+        }
+      ],
+      "prevalence_scenarios": {
+        "0.01": {
+          "ppv": 0.04347826086956522,
+          "false_discovery_rate": 0.9565217391304348
+        },
+        "0.05": {
+          "ppv": 0.1914893617021277,
+          "false_discovery_rate": 0.8085106382978723
+        },
+        "0.1": {
+          "ppv": 0.33333333333333337,
+          "false_discovery_rate": 0.6666666666666666
+        }
+      }
+    }
+  ]
+}

@@ -3,27 +3,43 @@
 
 # Manuscript files
 *.docx
-CCSF_JMIR_Infodemiology_Original_Paper*.txt
-CCSF_TobaccoControl*.docx
-multimedia_appendix*.docx
+*.txt
+multimedia_appendix*
 
-# Journal submission files
+# Journal submission and response files
 JMIR_*.md
 MANUSCRIPT_REVISION_NOTES.md
 CCSF_JMIR_Infodemiology_Original_Paper_R3.md
 
-# Generated outputs
-stage2_outputs/
+# Generated runtime outputs and caches
 __pycache__/
-*.npz
+*.pyc
 
-# Data files (optional - include if needed)
-*.csv
-
-# Keep example configs
-!validation_config.example.json
+# Stage 2 reproducibility outputs (allowed)
 !stage2_config.json
-!requirements.txt
-!requirements-lock.txt
-!CITATION.cff
-!LICENSE
+!stage2_outputs/stage2_results.json
+!stage2_outputs/stage2_account_features.csv
+!stage2_outputs/stage2_validation_corpus.csv
+!stage2_outputs/stage2_dataset_manifest.json
+!stage2_outputs/stage2_splits/
+!stage2_outputs/stage2_eval_leave_one_*.json
+!stage2_outputs/openrouter_models_snapshot_2026-07-11.json
+!stage2_outputs/fig*.png
+!stage2_outputs/derived_v1/
+
+# Baseline data files (allowed)
+!baseline/*.csv
+!baseline/*.npz
+!baseline/*.json
+!baseline/*.md
+!baseline/*.png
+!baseline/*.svg
+
+# Schema files are allowed
+!validation_corpus_schema.csv
+
+# Raw provider responses contain per-request metadata
+stage2_outputs/stage2_raw_responses.jsonl
+stage2_outputs/stage2_paraphrase_responses.jsonl
+stage2_outputs/stage2_requests.jsonl
+stage2_outputs/stage2_final_posts.jsonl

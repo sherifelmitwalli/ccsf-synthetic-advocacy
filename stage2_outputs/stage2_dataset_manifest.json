@@ -1,0 +1,62 @@
+{
+  "n_records": 1248,
+  "n_accounts": 156,
+  "records_by_class": {
+    "coordinated_synthetic": 480,
+    "simulated_human_control": 768
+  },
+  "accounts_by_class": {
+    "coordinated_synthetic": 60,
+    "simulated_human_control": 96
+  },
+  "generators": [
+    "gemini_flash_lite",
+    "qwen_3_6_35b",
+    "seed_2_mini"
+  ],
+  "prompt_families": [
+    "direct_talking_points",
+    "grassroots_persona",
+    "indirect_policy_discussion"
+  ],
+  "topics": [
+    "advertising and promotion rules for vaping products",
+    "enforcement of youth access laws for vaping products",
+    "flavour restrictions for nicotine vaping products",
+    "product safety and manufacturing standards for vaping devices",
+    "retail licensing for nicotine product sellers",
+    "taxation of alternative nicotine products",
+    "the role of vaping products in smoking cessation services",
+    "use of vaping products in public places"
+  ],
+  "transformations": [
+    "llm_paraphrase",
+    "noise_insertion",
+    "none",
+    "sentence_restructure"
+  ],
+  "provenance_contract": [
+    "record_id",
+    "account_id",
+    "campaign_id",
+    "class_label",
+    "text",
+    "topic",
+    "generator_id",
+    "generator_family",
+    "generator_model",
+    "generator_revision",
+    "prompt_family",
+    "prompt_revision",
+    "temperature",
+    "diversity_setting",
+    "talking_point_repertoire",
+    "style_instruction",
+    "transformation_id",
+    "transformation_revision",
+    "evaluation_batch",
+    "split_role",
+    "seed"
+  ],
+  "interpretation": "Independent-validation corpus. Results are reportable only after every model and transformation represented here has actually been executed and retained."
+}
