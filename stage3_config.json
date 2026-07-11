@@ -1,0 +1,13 @@
+{
+  "stage": "exploratory_post_hoc_synthetic_stage3",
+  "seed": 20260604,
+  "relational_batch": "held_out_generator_family_unlabelled_accounts",
+  "tfidf": {"ngram_range": [1, 2], "min_df": 1, "norm": "l2"},
+  "graph": {"type": "mutual_knn_cosine", "k": 3},
+  "model": {"solver": "liblinear", "penalty": "l2", "C": 1.0, "class_weight": "balanced"},
+  "bootstrap": {"n_resamples": 2000, "confidence": 0.95},
+  "calibration_bins": 5,
+  "default_threshold": 0.5,
+  "development_threshold": "out_of_fold_youden",
+  "assumed_prevalence": 0.01
+}

@@ -1,0 +1,8 @@
+{
+  "status": "frozen_before_stage3_performance",
+  "unit": "account",
+  "prohibited_predictors": ["class_label", "campaign_id", "account_id", "prompt_family", "transformation_id", "record_id", "generator_model", "generator_revision", "generator_id", "row_order", "filename"],
+  "relational_features": ["top3_cosine_mean", "max_cosine", "top3_jaccard_mean", "max_jaccard", "semantic_without_literal_reuse", "mutual_knn_weighted_degree", "mutual_knn_clustering", "mutual_knn_component_size_normalized"],
+  "input_files": ["stage2_outputs/stage2_validation_corpus.csv", "stage2_outputs/stage2_account_features.csv", "stage2_outputs/stage2_splits/leave_one_generator_id_out.json", "stage2_outputs/stage2_eval_leave_one_generator_id_out.json"],
+  "checksums": "to be populated by stage3_evaluate.py from frozen inputs"
+}
