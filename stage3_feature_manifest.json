@@ -1,8 +1,49 @@
 {
   "status": "frozen_before_stage3_performance",
   "unit": "account",
-  "prohibited_predictors": ["class_label", "campaign_id", "account_id", "prompt_family", "transformation_id", "record_id", "generator_model", "generator_revision", "generator_id", "row_order", "filename"],
-  "relational_features": ["top3_cosine_mean", "max_cosine", "top3_jaccard_mean", "max_jaccard", "semantic_without_literal_reuse", "mutual_knn_weighted_degree", "mutual_knn_clustering", "mutual_knn_component_size_normalized"],
-  "input_files": ["stage2_outputs/stage2_validation_corpus.csv", "stage2_outputs/stage2_account_features.csv", "stage2_outputs/stage2_splits/leave_one_generator_id_out.json", "stage2_outputs/stage2_eval_leave_one_generator_id_out.json"],
-  "checksums": "to be populated by stage3_evaluate.py from frozen inputs"
+  "prohibited_predictors": [
+    "class_label",
+    "campaign_id",
+    "account_id",
+    "prompt_family",
+    "transformation_id",
+    "record_id",
+    "generator_model",
+    "generator_revision",
+    "generator_id",
+    "row_order",
+    "filename"
+  ],
+  "relational_features": [
+    "top3_cosine_mean",
+    "max_cosine",
+    "top3_jaccard_mean",
+    "max_jaccard",
+    "semantic_without_literal_reuse",
+    "mutual_knn_weighted_degree",
+    "mutual_knn_clustering",
+    "mutual_knn_component_size_normalized"
+  ],
+  "input_files": [
+    "stage2_outputs/stage2_validation_corpus.csv",
+    "stage2_outputs/stage2_account_features.csv",
+    "stage2_outputs/stage2_splits/leave_one_generator_id_out.json",
+    "stage2_outputs/stage2_eval_leave_one_generator_id_out.json"
+  ],
+  "checksums": {
+    "stage2_outputs/stage2_validation_corpus.csv": "67b764341661d59df36bcf48bc790efb9bfb82d9fd5b86090eb9505ed661c278",
+    "stage2_outputs/stage2_account_features.csv": "dc8b85383063b64ca4d3a0421c420ae179e2ae67b205cbc87c0eb575b6fac697",
+    "stage2_outputs/stage2_splits/leave_one_generator_id_out.json": "6cb54f81e2f94b4199aeb4dded28b7d06873d4105507547d754553c81cf9a172",
+    "stage2_outputs/stage2_eval_leave_one_generator_id_out.json": "152c51796d99727e3930e65c4449364b7a91871c150f8df6d3a10e49d5ac451d"
+  },
+  "protocol_checksum": {
+    "STAGE3_PROTOCOL.md": "34d314aeac3e6154b4227d2b4463b25e451d183119a965b74061155ba922aa2f",
+    "stage3_config.json": "2beabf425438ffef1242302480991e54f9126a5a5f9b1cc17da92e369fe17a54"
+  },
+  "relational_batch": "per_generator_family_batch: each account's relational features computed only against other accounts of the SAME generator family (52 accounts/batch); generator family used solely to define the unlabelled batch and the leave-one-generator-family-out splits, never as a predictor",
+  "embedding_environment": {
+    "representation": "deterministic offline TF-IDF (scikit-learn TfidfVectorizer, word 1-2 grams, min_df=1, L2 norm); per-account centroid = mean of its 8 post vectors, renormalized",
+    "note": "The project's neural sentence-embedding instrument (all-MiniLM-L6-v2) could not be executed in this offline analysis environment because HuggingFace model-weight endpoints are network-blocked (403). Stage 3 relational similarity therefore uses a fully reproducible, download-free TF-IDF content representation, frozen in this protocol before any Stage 3 performance was computed. The MiniLM-derived account-level convergence feature is still present in the CCSF/CCSF-LR/hybrid account features. This substitution is documented as a Stage 3 limitation.",
+    "seed": 20260604
+  }
 }
