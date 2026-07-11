@@ -13,8 +13,8 @@ authors:
 repository-code: "https://github.com/sherifelmitwalli/ccsf-synthetic-advocacy"
 abstract: >-
   Code and fully synthetic data for a controlled construct-validity baseline and
-  provenance-first independent-validation framework for Compliance-Constrained
-  Semantic Fingerprinting (CCSF), a data-minimising, account-level fingerprint
+  provenance-first independent-validation framework for Coordinated Communication
+  Signal Fingerprinting (CCSF), a data-minimising, account-level fingerprint
   intended to support later cluster or campaign investigation in alternative
   nicotine delivery system policy discourse. All bundled data are synthetic.
 keywords:

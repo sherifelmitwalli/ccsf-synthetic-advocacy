@@ -17,7 +17,7 @@ Independent validation is deliberately not yet reported. It requires actual outp
 | `baseline/` | Immutable copy of the original baseline corpus, results, arrays and figures. |
 | `corpus_gen.py` | Reproduces the baseline simulation. It uses legacy `mixed` internally; its external condition label is rule-perturbed synthetic. |
 | `analysis.py` | Baseline feature extraction at the account level. Logistic-regression scaling is inside its cross-validation pipeline. Pin the declared model revisions before release. |
-| `figures.py` | Future figure generator with corrected account-level/data-minimising terminology. Do not regenerate manuscript figures until the final manuscript stage is authorised. |
+| `figures.py` | Figure generator with corrected account-level/data-minimising terminology; regenerates repository figures from verified outputs. |
 | `validation_corpus_schema.csv` | Required provenance schema for independently generated validation text. |
 | `validation_generation.py` | Builds provenance-complete pending generation requests and ingests only verified external model responses. It never fabricates text. |
 | `validation_framework.py` | Validates provenance and produces disjoint leave-generator, leave-prompt-family, leave-topic and leave-transformation account splits. |
@@ -25,7 +25,7 @@ Independent validation is deliberately not yet reported. It requires actual outp
 | `validation_config.example.json` | Non-executed configuration template for three independent generator families. |
 | `dataset_registry.json` | Status and provenance of the baseline and independent-validation datasets. |
 | `verify_outputs.py` | Verifies baseline invariants and the independent-validation framework state. |
-| `MANUSCRIPT_REVISION_NOTES.md` | Deferred manuscript work; the manuscript itself is intentionally unchanged. |
+| `MANUSCRIPT_REVISION_NOTES.md` | Deferred manuscript notes and claim-audit guidance. |
 
 ## Terminology
 
@@ -37,7 +37,7 @@ Independent validation is deliberately not yet reported. It requires actual outp
 ## Independent-validation workflow
 
 1. Replace the placeholders in `validation_config.example.json`; then build pending requests with `python validation_generation.py build-requests validation_config.json --output generation_requests.jsonl`. Submit those through approved model adapters or retain exported model responses.
-2. Ingest only actual responses whose model IDs/revisions match their requests: `python validation_generation.py ingest generation_requests.jsonl model_responses.jsonl --output validation_corpus.csv`. The responses must include matched human-control accounts in every evaluation batch.
+2. Ingest only actual responses whose model IDs/revisions match their requests: `python validation_generation.py ingest generation_requests.jsonl model_responses.jsonl --output validation_corpus.csv`. The responses must include matched comparison-control accounts in every evaluation batch.
 3. Validate provenance and build only disjoint account-level condition holdouts:
 
 ```bash
