@@ -1,0 +1,33 @@
+{
+  "baseline": {
+    "location": "baseline/",
+    "kind": "controlled construct-validity simulation",
+    "seed": 20260604,
+    "generator": "repository talking-point engine",
+    "condition_label": {
+      "mixed": "rule-perturbed synthetic"
+    },
+    "interpretation": "The baseline deliberately instantiates the regularities measured by CCSF. Its AUCs are not independent validation or operational performance estimates."
+  },
+  "independent_validation": {
+    "location": "stage2_outputs/stage2_validation_corpus.csv",
+    "schema": "validation_corpus_schema.csv",
+    "status": "executed 2026-07-11 (stage 2, preliminary scale)",
+    "seed": 20260711,
+    "generators": {
+      "google/gemini-3.1-flash-lite": "gemini-3.1-flash-lite-20260507",
+      "qwen/qwen3.6-35b-a3b": "qwen3.6-35b-a3b-20260415",
+      "bytedance-seed/seed-2.0-mini": "seed-2.0-mini-20260224",
+      "tencent/hy3 (paraphrase transform only)": "hy3-20260706"
+    },
+    "composition": "156 accounts (60 coordinated, 60 organic-style control, 36 vocabulary-matched professional control), 1248 posts, 8 topics, 3 prompt families, 2 temperatures, 4 transformation conditions",
+    "provenance": "stage2_outputs/stage2_raw_responses.jsonl, stage2_paraphrase_responses.jsonl, openrouter_models_snapshot_2026-07-11.json",
+    "results": "stage2_outputs/stage2_results.json; leave-one-generator-family-out ROC AUC 0.711-0.878 (mean 0.797)",
+    "interpretation": "Preliminary external-generalisation evidence. Controls are LLM-generated; automated transformations only; no human editing; wide CIs. Stage 1 fixed-direction composite does not transfer (pooled AUC 0.394)."
+  },
+  "method": {
+    "name": "Coordinated Communication Signal Fingerprinting",
+    "acronym": "CCSF",
+    "legacy_name": "Compliance-Constrained Semantic Fingerprinting (historical documentation only)"
+  }
+}

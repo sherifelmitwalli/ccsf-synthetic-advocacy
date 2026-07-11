@@ -1,0 +1,40 @@
+{
+  "dataset_id": "ccsf-construct-validity-baseline-20260604",
+  "kind": "controlled synthetic construct-validity baseline",
+  "seed": 20260604,
+  "unit_of_analysis": "account",
+  "n_posts": 524,
+  "n_accounts": 78,
+  "group_counts": {
+    "organic": 40,
+    "synthetic": 16,
+    "professional": 12,
+    "mixed": 10
+  },
+  "legacy_label_mapping": {
+    "mixed": "rule-perturbed synthetic"
+  },
+  "generator": {
+    "id": "repository_talking_point_engine",
+    "revision": "repository source snapshot prior to independent-validation framework",
+    "model_family": "rule-based template generator"
+  },
+  "feature_models": {
+    "perplexity": {
+      "model_id": "gpt2",
+      "revision": "historical baseline did not record immutable revision"
+    },
+    "embedding": {
+      "model_id": "all-MiniLM-L6-v2",
+      "revision": "historical baseline did not record immutable revision"
+    }
+  },
+  "interpretation": "Defining regularities were deliberately instantiated; results demonstrate construct validity only, not independent validation or operational accuracy.",
+  "sha256": {
+    "synthetic_corpus.csv": "b7be0d8c1ce0c95c3c99c2aad83900d99739bbe1cc03cda8bf44c412d25b9fc2",
+    "account_features.csv": "b12175b8f2a8382fff4897c9e620b54de50a85e12fe9f25afcdd91918acb5dca",
+    "results.json": "9bc3f798c93d8c99b822d707965615db6fa347bb5aef8ac5337c33b089ee7ba5",
+    "arrays.npz": "99650a74f13a96ff30f857fe915857e9f9a596eadd9c9caca2a61e7890783daa",
+    "fingerprint_profiles.csv": "b814524c815afdf91546a49f7faeaa65acbbfdc3422629d7c40f4fff7e94cc7c"
+  }
+}

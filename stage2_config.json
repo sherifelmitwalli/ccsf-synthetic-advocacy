@@ -1,0 +1,110 @@
+{
+  "status": "not_run",
+  "stage": "stage2_independent_multigenerator_validation",
+  "seed": 20260711,
+  "purpose": "Independent multi-generator CCSF validation via OpenRouter. Model IDs verified against the live OpenRouter catalogue on 2026-07-11. Stage 1 (rule-based construct verification) is never mixed with this corpus.",
+  "openrouter": {
+    "base_url": "https://openrouter.ai/api/v1",
+    "api_key_env": "OPENROUTER_API_KEY",
+    "app_title": "CCSF-Stage2-Validation",
+    "max_retries": 3,
+    "timeout_seconds": 180,
+    "top_p": 0.95,
+    "max_tokens": 1600,
+    "disable_reasoning": true
+  },
+  "generators": [
+    {
+      "generator_id": "gemini_flash_lite",
+      "generator_family": "google_gemini",
+      "model": "google/gemini-3.1-flash-lite",
+      "revision": "openrouter_catalogue_2026-07-11",
+      "provider_preferences": null
+    },
+    {
+      "generator_id": "qwen_3_6_35b",
+      "generator_family": "alibaba_qwen",
+      "model": "qwen/qwen3.6-35b-a3b",
+      "revision": "qwen3.6-35b-a3b-20260415",
+      "provider_preferences": { "order": ["Parasail", "Io Net", "AtlasCloud"], "allow_fallbacks": false }
+    },
+    {
+      "generator_id": "seed_2_mini",
+      "generator_family": "bytedance_seed",
+      "model": "bytedance-seed/seed-2.0-mini",
+      "revision": "seed-2.0-mini-20260224",
+      "provider_preferences": { "order": ["Seed"], "allow_fallbacks": false }
+    }
+  ],
+  "transform_model": {
+    "generator_id": "hy3_transformer",
+    "generator_family": "tencent_hunyuan",
+    "model": "tencent/hy3",
+    "revision": "openrouter_catalogue_2026-07-11",
+    "note": "Paid endpoint only; never the :free variant. Distinct from all three generator families so paraphrase does not leak a generator family across leave-one-family-out folds.",
+    "provider_preferences": null
+  },
+  "design": {
+    "accounts_per_generator": { "coordinated": 20, "organic_control": 20, "professional_control": 12 },
+    "posts_per_account": 8,
+    "temperatures": [0.35, 0.95],
+    "transformations_cycle": ["none", "llm_paraphrase", "noise_insertion", "sentence_restructure"],
+    "transformations_apply_to": ["coordinated", "organic_control"],
+    "professional_control_transformation": "none"
+  },
+  "topics": [
+    "flavour restrictions for nicotine vaping products",
+    "taxation of alternative nicotine products",
+    "advertising and promotion rules for vaping products",
+    "retail licensing for nicotine product sellers",
+    "enforcement of youth access laws for vaping products",
+    "use of vaping products in public places",
+    "product safety and manufacturing standards for vaping devices",
+    "the role of vaping products in smoking cessation services"
+  ],
+  "prompt_families": [
+    { "id": "direct_talking_points", "revision": "v1" },
+    { "id": "grassroots_persona", "revision": "v1" },
+    { "id": "indirect_policy_discussion", "revision": "v1" }
+  ],
+  "campaign_repertoires": [
+    {
+      "name": "stage2_repertoire_consumer_access",
+      "objective": "argue that adult consumers should retain access to alternative nicotine products under proportionate regulation",
+      "points": [
+        "adults who switched from cigarettes rely on continued access to these products",
+        "overly strict rules push consumers back to cigarettes or to unregulated sellers",
+        "regulation should distinguish between products by relative risk",
+        "small vape retailers are part of local economies and follow the rules",
+        "policy should be reviewed against real-world consumer outcomes",
+        "cessation support and access to alternatives work better together",
+        "enforcement should target youth sales, not adult access",
+        "consumers deserve a voice in rules that affect them directly"
+      ]
+    },
+    {
+      "name": "stage2_repertoire_policy_balance",
+      "objective": "argue that upcoming nicotine policy proposals go too far and that balanced rules serve public health better",
+      "points": [
+        "the current proposal treats very different products identically",
+        "international experience shows balanced regimes reduce smoking faster",
+        "unintended consequences of bans include illicit markets",
+        "independent evidence reviews should precede new restrictions",
+        "taxes set too high penalise adults who quit smoking by switching",
+        "clear product standards protect consumers better than prohibitions",
+        "public consultation periods are too short for those affected",
+        "policy stability helps compliant businesses plan and comply"
+      ]
+    }
+  ],
+  "professional_vocabulary_matching": {
+    "note": "The professional control is deliberately vocabulary-matched: it must naturally use commercial-policy framing terms so that framing density cannot separate it trivially, replacing the Stage 1 zero-match control.",
+    "terms_to_use_naturally": ["harm reduction", "evidence-based policy", "adult choice", "reduced-risk", "smoke-free alternatives", "proportionate regulation"]
+  },
+  "feature_models": {
+    "perplexity": { "model_id": "gpt2", "revision": "pin before release" },
+    "embedding": { "model_id": "all-MiniLM-L6-v2", "revision": "pin before release" }
+  },
+  "required_holdouts": ["generator_id", "prompt_family", "topic", "transformation_id"],
+  "outputs_dir": "stage2_outputs"
+}

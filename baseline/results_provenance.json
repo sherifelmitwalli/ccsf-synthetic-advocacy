@@ -1,0 +1,10 @@
+{
+  "result_file": "results.json",
+  "status": "historical preserved baseline",
+  "legacy_term_mapping": {
+    "mixed": "rule-perturbed synthetic",
+    "composite_mixed_vs_organic": "composite_rule_perturbed_vs_organic",
+    "composite_machineorigin_vs_human": "template-derived versus simulated-human contrast (not a machine-origin detector result)"
+  },
+  "interpretation": "Construct-validity baseline only; not independent validation or operational accuracy."
+}

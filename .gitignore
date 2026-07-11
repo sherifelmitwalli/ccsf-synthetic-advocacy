@@ -1,0 +1,29 @@
+# Environment secrets
+.env
+
+# Manuscript files
+*.docx
+CCSF_JMIR_Infodemiology_Original_Paper*.txt
+CCSF_TobaccoControl*.docx
+multimedia_appendix*.docx
+
+# Journal submission files
+JMIR_*.md
+MANUSCRIPT_REVISION_NOTES.md
+CCSF_JMIR_Infodemiology_Original_Paper_R3.md
+
+# Generated outputs
+stage2_outputs/
+__pycache__/
+*.npz
+
+# Data files (optional - include if needed)
+*.csv
+
+# Keep example configs
+!validation_config.example.json
+!stage2_config.json
+!requirements.txt
+!requirements-lock.txt
+!CITATION.cff
+!LICENSE

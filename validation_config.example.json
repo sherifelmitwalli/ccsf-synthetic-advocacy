@@ -1,0 +1,18 @@
+{
+  "status":"not_run", "seed":20260711,
+  "purpose":"Independent CCSF validation. Replace every model/revision placeholder before execution.",
+  "development_evaluation_separation":{"development":"Feature definitions and the baseline construct-validity corpus only.","evaluation":"Independent model outputs, prompts, topics and transformations absent from baseline templates."},
+  "generators":[
+    {"generator_id":"generator_a","generator_family":"independent_family_a","model":"REPLACE_WITH_MODEL_ID","revision":"REPLACE_WITH_IMMUTABLE_REVISION","access":"credentials or exported responses required"},
+    {"generator_id":"generator_b","generator_family":"independent_family_b","model":"REPLACE_WITH_MODEL_ID","revision":"REPLACE_WITH_IMMUTABLE_REVISION","access":"credentials or exported responses required"},
+    {"generator_id":"generator_c","generator_family":"independent_family_c","model":"REPLACE_WITH_MODEL_ID","revision":"REPLACE_WITH_IMMUTABLE_REVISION","access":"credentials or exported responses required"}],
+  "prompt_families":[
+    {"id":"consumer-rights","revision":"v1","objective":"argue for adult access while acknowledging youth safeguards"},
+    {"id":"policy-evidence","revision":"v1","objective":"advocate a specific policy position using cautious evidence framing"},
+    {"id":"retail-and-enforcement","revision":"v1","objective":"focus on enforcement, retail practice and unintended consequences"}],
+  "topics":["flavour_restrictions","taxation","advertising_regulation"], "temperatures":[0.2,0.8], "diversity_settings":["default","high_diversity"],
+  "talking_point_repertoires":[{"name":"repertoire_a","points":["cessation service access","retailer accountability","proportionate safeguards"]},{"name":"repertoire_b","points":["price effects","illicit supply concerns","transparent evidence standards"]}],
+  "style_instructions":[{"id":"plain-language","instruction":"Use concise plain language and varied sentence lengths."},{"id":"policy-brief","instruction":"Use a restrained policy-brief style without copied slogans."}],
+  "automated_transformations":[{"id":"none","revision":"v1"},{"id":"paraphrase","revision":"REPLACE_WITH_TRANSFORM_MODEL_AND_REVISION"},{"id":"style_transfer","revision":"REPLACE_WITH_TRANSFORM_MODEL_AND_REVISION"},{"id":"sentence_restructure","revision":"REPLACE_WITH_TRANSFORM_MODEL_AND_REVISION"},{"id":"noise_insertion","revision":"v1"},{"id":"back_translation","revision":"REPLACE_WITH_TRANSLATION_MODEL_AND_REVISION"}],
+  "required_holdouts":["generator_id","prompt_family","topic","transformation_id"]
+}
