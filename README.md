@@ -10,6 +10,10 @@ The historical internal group value `mixed` is retained only for compatibility. 
 
 A held-out multigenerator stress test was executed on 2026-07-11 at a preliminary scale (**Stage 2**, `stage2_outputs/`): three unseen LLM generator families with dated canonical model endpoints, with provider and generation metadata archived, same-model organic and vocabulary-matched professional controls, automated transformations, and leave-one-generator-family-out evaluation. Headline results: the Stage 1 fixed-direction composite does not transfer to LLM text and is significantly below chance (pooled AUC 0.394, 95% CI 0.310-0.481); a logistic reweighting of the same four features (CCSF-LR) reaches held-out-family ROC AUC 0.711-0.878 (mean 0.797), with coefficients that preserve only the burstiness direction; under equivalent-group comparison, untransformed coordinated-vs-organic separation pools near chance and transformation cells are heterogeneous. These are preliminary held-out-generalisation estimates with wide CIs — see `STAGE2_README.md`, `stage2_outputs/stage2_results.json` and the versioned derivative analyses in `stage2_outputs/derived_v1/`. Full provenance (raw responses, generation IDs, catalogue snapshot) is retained. Note on reproducibility: all statistical analyses are exactly reproducible from the archived outputs; the generation step itself queried remotely hosted model revisions and is not guaranteed re-executable — the archived raw responses are the authoritative record.
 
+### Stage 3 (exploratory, post hoc, synthetic — `stage3_outputs/`)
+
+Stage 3 is an **exploratory post hoc synthetic extension**, designed *after* Stage 2 and motivated by its negative finding. It is **not prespecified**. It performs **no new generation, uses no APIs, and uses no real-world data** — only the frozen Stage 2 outputs. Its protocol, configuration, and feature list were frozen and committed *before* any Stage 3 held-out performance was computed. It asks whether **label-free cross-account relational features** (nearest-neighbour cosine/Jaccard similarity and mutual-kNN graph structure, computed transductively within each unlabelled held-out generator-family batch) improve leave-one-generator-family-out discrimination beyond the account-level features. Adding relational features raises pooled held-out ROC AUC from 0.799 (CCSF-LR) to 0.993 (hybrid) against all controls and to 0.996 against organic-style controls only, with paired-bootstrap gains of +0.193 [0.129, 0.268] and +0.275 [0.185, 0.365]; the fixed-direction composite remains below chance and a label-permutation control sits at chance (no leakage). Because the synthetic coordinated accounts share a fixed talking-point repertoire, this is a **synthetic construct demonstration under a transductive batch design, not evidence of real-world detection, attribution, or operational readiness**, and it does not replace the Stage 2 negative result. See `STAGE3_README.md`, `STAGE3_PROTOCOL.md`, and `stage3_outputs/`.
+
 ## Repository map
 
 | File or folder | Purpose |
@@ -27,6 +31,10 @@ A held-out multigenerator stress test was executed on 2026-07-11 at a preliminar
 | `verify_outputs.py` | Verifies baseline invariants and the independent-validation framework state. |
 | `stage2_derived_analysis.py` | Versioned derivative analyses over the frozen Stage 2 outputs (coefficients, development-only thresholds, calibration summary, equivalent-group transformation contrasts, Stage 2 coordinated-originality test). Writes `stage2_outputs/derived_v1/`; no generation, no API calls. |
 | `stage2_figures_v2.py` | Revised figures from frozen + derived outputs (writes `stage2_outputs/derived_v1/figures/`). |
+| `stage3_relational_features.py` | **Stage 3 (exploratory, post hoc, synthetic).** Builds 8 label-free cross-account relational features per account from frozen Stage 2 text only; no generation, no API. Writes `stage3_outputs/stage3_account_relational_features.csv`. |
+| `stage3_evaluate.py` | Stage 3 four-model (fixed CCSF / CCSF-LR / relational-only / hybrid) leave-one-generator-family-out evaluation over frozen outputs; writes `stage3_outputs/` results, comparisons, permutation control, manifest. |
+| `verify_stage3.py` | Stage 3 leakage, partition, dev-only-scaling, prediction-reproducibility, and label-permutation negative-control checks (10 checks). |
+| `stage3_figures.py` | Stage 3 grayscale-readable figures from frozen Stage 3 outputs (writes `stage3_outputs/figures/`). |
 
 ## Terminology
 
@@ -63,7 +71,13 @@ Do not use random folds as the principal generalisation evidence. The generated 
 python verify_outputs.py
 ```
 
-This validates the archived baseline (Stage 1). Stage 2 checks in `stage2_run.py` verify the executed multigenerator analysis against frozen `stage2_outputs/`.
+This validates the archived baseline (Stage 1). Stage 2 checks in `stage2_run.py` verify the executed multigenerator analysis against frozen `stage2_outputs/`. Stage 3 checks:
+
+```bash
+python verify_stage3.py
+```
+
+This runs the 10 Stage 3 leakage, disjoint-partition, development-only-scaling, prediction-reproducibility, and label-permutation negative-control checks against the frozen Stage 3 outputs (all PASS).
 
 ## Legacy mappings
 

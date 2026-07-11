@@ -1,0 +1,66 @@
+{
+ "stage": "exploratory_post_hoc_synthetic_stage3",
+ "seed": 20260604,
+ "input_checksums": {
+  "stage2_outputs/stage2_validation_corpus.csv": "67b764341661d59df36bcf48bc790efb9bfb82d9fd5b86090eb9505ed661c278",
+  "stage2_outputs/stage2_account_features.csv": "dc8b85383063b64ca4d3a0421c420ae179e2ae67b205cbc87c0eb575b6fac697",
+  "stage2_outputs/stage2_splits/leave_one_generator_id_out.json": "6cb54f81e2f94b4199aeb4dded28b7d06873d4105507547d754553c81cf9a172",
+  "stage2_outputs/stage2_eval_leave_one_generator_id_out.json": "152c51796d99727e3930e65c4449364b7a91871c150f8df6d3a10e49d5ac451d",
+  "stage3_outputs/stage3_account_relational_features.csv": "f7a05ad13d8dbdea4613191c791379f44e5d16d400b918c37c57b05e24793463"
+ },
+ "protocol_checksums": {
+  "STAGE3_PROTOCOL.md": "e5e122f543eef442d5297c51f45f245ac74d4858f7d81c6369bec8c18f266d08",
+  "stage3_config.json": "2beabf425438ffef1242302480991e54f9126a5a5f9b1cc17da92e369fe17a54",
+  "stage3_feature_manifest.json": "41613b1e72a083246aeb001308da96718953b2cf22229d37e2d754ffe0d727ac"
+ },
+ "code_checksums": {
+  "stage3_relational_features.py": "6d96f07c347814af07c4f3a67d4b7da244bda18f1a752df92c6b8fd6fb5356a4",
+  "stage3_evaluate.py": "3179659969d2041bd58dd482cf8c433251339df64038b3c14ca0a276331a0582",
+  "verify_stage3.py": "0af0cce445532135d958686454be1a6f801d1bca598509bb1ff536d6427f6d0c"
+ },
+ "feature_names": {
+  "ccsf": [
+   "ppl_mean",
+   "burstiness",
+   "commercial_policy_framing",
+   "convergence"
+  ],
+  "relational": [
+   "top3_cosine_mean",
+   "max_cosine",
+   "top3_jaccard_mean",
+   "max_jaccard",
+   "semantic_without_literal_reuse",
+   "mutual_knn_weighted_degree",
+   "mutual_knn_clustering",
+   "mutual_knn_component_size_normalized"
+  ]
+ },
+ "sample_counts": {
+  "accounts": 156,
+  "coordinated": 60,
+  "controls": 96
+ },
+ "package_versions": {
+  "python": "3.10.12",
+  "numpy": "2.2.6",
+  "pandas": "2.3.3",
+  "sklearn": "1.7.2",
+  "scipy": "1.15.3",
+  "networkx": "3.4.2"
+ },
+ "generation_timestamp_utc": "2026-07-11T21:17:13.556484+00:00",
+ "verification_status": "verify_stage3_passed_all_10_checks",
+ "verification_checks": [
+  "C1_input_checksums",
+  "C2_no_prohibited_predictors",
+  "C3_relational_csv_clean",
+  "C4_label_permutation_feature_invariance",
+  "C5_row_order_invariance",
+  "C6_disjoint_partitions",
+  "C7_dev_only_scaling",
+  "C8_prediction_reproducibility",
+  "C9_permutation_control_at_chance",
+  "C10_fixed_ccsf_below_chance_preserved"
+ ]
+}

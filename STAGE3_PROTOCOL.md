@@ -6,8 +6,9 @@ Stage 3 is an exploratory, post hoc, entirely synthetic extension prompted by th
 below-chance fixed-direction Stage 2 result. It asks whether label-free
 cross-account relational features improve leave-one-generator-family-out
 discrimination of coordinated synthetic accounts relative to fixed-direction CCSF
-and CCSF-LR. It uses no new text, APIs, real-world data, or EU consultation data.
-Results will be reported whatever their direction or stability.
+and CCSF-LR. It uses no new text, APIs, or real-world data.
+Results will be reported whatever their direction or stability. It uses no external or
+real-world dataset of any kind.
 
 ## Inputs, unit, and batches
 

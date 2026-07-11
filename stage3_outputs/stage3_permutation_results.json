@@ -1,0 +1,44 @@
+{
+ "hybrid": {
+  "n_perm": 150,
+  "mean_auc": 0.5013391203703704,
+  "ci": [
+   0.28703125,
+   0.707248263888889
+  ],
+  "max_auc": 0.7588541666666667,
+  "feats": [
+   "ppl_mean",
+   "burstiness",
+   "commercial_policy_framing",
+   "convergence",
+   "top3_cosine_mean",
+   "max_cosine",
+   "top3_jaccard_mean",
+   "max_jaccard",
+   "semantic_without_literal_reuse",
+   "mutual_knn_weighted_degree",
+   "mutual_knn_clustering",
+   "mutual_knn_component_size_normalized"
+  ]
+ },
+ "relational_only": {
+  "n_perm": 150,
+  "mean_auc": 0.5015648148148149,
+  "ci": [
+   0.2572873263888889,
+   0.777443576388889
+  ],
+  "max_auc": 0.8623263888888889,
+  "feats": [
+   "top3_cosine_mean",
+   "max_cosine",
+   "top3_jaccard_mean",
+   "max_jaccard",
+   "semantic_without_literal_reuse",
+   "mutual_knn_weighted_degree",
+   "mutual_knn_clustering",
+   "mutual_knn_component_size_normalized"
+  ]
+ }
+}

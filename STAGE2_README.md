@@ -74,3 +74,17 @@ applied unchanged to held-out families, calibration summaries, equivalent-group 
 contrasts (professional controls excluded from every cell), and a Stage 2 test of the Stage 1
 "coordinated originality" signature. A consistency check refits the frozen evaluation and asserts
 identical held-out AUCs. Original Stage 2 evidence is never modified.
+
+## Stage 3 (exploratory, post hoc, synthetic — see `STAGE3_README.md`)
+
+Prompted by the below-chance fixed-direction Stage 2 result, an **exploratory post hoc synthetic**
+extension (`stage3_outputs/`) tests whether **label-free cross-account relational features** improve
+leave-one-generator-family-out discrimination beyond the account-level features. Stage 3 is **not
+prespecified**, performs **no new generation and uses no APIs or real-world data**, and reads only the
+frozen Stage 2 outputs above (which it leaves unchanged); its protocol and feature list were frozen
+before any Stage 3 performance was computed. Adding relational features raises pooled held-out ROC AUC
+from 0.799 (CCSF-LR) to 0.993 (hybrid; 0.996 vs organic-style controls), the fixed-direction composite
+stays below chance, and a label-permutation control sits at chance. Because coordinated accounts share
+a fixed talking-point repertoire, this is a synthetic construct demonstration under a transductive
+batch design — not real-world detection — and it does not replace the Stage 2 negative finding. Full
+detail, protocol, and reproduction commands are in `STAGE3_README.md` and `STAGE3_PROTOCOL.md`.

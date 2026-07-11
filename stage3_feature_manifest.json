@@ -37,7 +37,7 @@
     "stage2_outputs/stage2_eval_leave_one_generator_id_out.json": "152c51796d99727e3930e65c4449364b7a91871c150f8df6d3a10e49d5ac451d"
   },
   "protocol_checksum": {
-    "STAGE3_PROTOCOL.md": "34d314aeac3e6154b4227d2b4463b25e451d183119a965b74061155ba922aa2f",
+    "STAGE3_PROTOCOL.md": "e5e122f543eef442d5297c51f45f245ac74d4858f7d81c6369bec8c18f266d08",
     "stage3_config.json": "2beabf425438ffef1242302480991e54f9126a5a5f9b1cc17da92e369fe17a54"
   },
   "relational_batch": "per_generator_family_batch: each account's relational features computed only against other accounts of the SAME generator family (52 accounts/batch); generator family used solely to define the unlabelled batch and the leave-one-generator-family-out splits, never as a predictor",
@@ -45,5 +45,6 @@
     "representation": "deterministic offline TF-IDF (scikit-learn TfidfVectorizer, word 1-2 grams, min_df=1, L2 norm); per-account centroid = mean of its 8 post vectors, renormalized",
     "note": "The project's neural sentence-embedding instrument (all-MiniLM-L6-v2) could not be executed in this offline analysis environment because HuggingFace model-weight endpoints are network-blocked (403). Stage 3 relational similarity therefore uses a fully reproducible, download-free TF-IDF content representation, frozen in this protocol before any Stage 3 performance was computed. The MiniLM-derived account-level convergence feature is still present in the CCSF/CCSF-LR/hybrid account features. This substitution is documented as a Stage 3 limitation.",
     "seed": 20260604
-  }
+  },
+  "note_post_freeze_edit": "STAGE3_PROTOCOL.md and this manifest had a single cosmetic post-freeze wording edit: a scope sentence was generalized to remove a named external dataset. The original frozen protocol is preserved in Git history (commits e0fa59a, 7632389). No feature, model, split, graph, threshold, or evaluation specification was changed."
 }
