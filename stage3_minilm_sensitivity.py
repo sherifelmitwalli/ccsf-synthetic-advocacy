@@ -197,8 +197,9 @@ def main():
     predictions = frame[["account_id", "generator_family", "class_label", "role", "transformation_id"]].copy()
     for name, columns in model_features.items():
         ev.rng = np.random.default_rng(SEED)
-        results[name] = ev.evaluate_model(frame, name, columns)
-        predictions[name] = ev.logo_predict(frame, columns)
+        result, proba = ev.evaluate_model(frame, name, columns)
+        results[name] = result
+        predictions[name] = proba
 
     primary = primary_predictions(frame)
     predictions = predictions.merge(primary, on="account_id", validate="1:1")
@@ -262,3 +263,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
