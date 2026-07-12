@@ -2,6 +2,20 @@
 
 This repository contains Coordinated Communication Signal Fingerprinting (CCSF), an interpretable tobacco-control surveillance and triage framework for prioritising potentially coordinated synthetic or automatically transformed advocacy for later expert review. It is not an individual-attribution, enforcement, legal-compliance, or real-world-ready system.
 
+## Author and contact
+
+Code and reproducibility package: Sherif Elmitwalli (`se606@bath.ac.uk`).
+
+## Installation
+
+Python 3.12 was used for the frozen analyses. Install the exact tested dependencies with:
+
+```bash
+python -m pip install -r requirements-lock.txt
+```
+
+`requirements.txt` contains the supported minimum versions for general use.
+
 ## Evidence status
 
 `baseline/` preserves the original seeded 524-post/78-account simulation and its derived artifacts. It is a **controlled construct-validity baseline**: the generator deliberately instantiates the regularities measured by the fingerprint, so its AUCs are not independent validation or operational-performance estimates.
@@ -38,7 +52,12 @@ An additional post hoc MiniLM sensitivity analysis was frozen before MiniLM perf
 | `verify_stage3.py` | Stage 3 leakage, partition, dev-only-scaling, prediction-reproducibility, and label-permutation negative-control checks (10 checks). |
 | `stage3_figures.py` | Stage 3 grayscale-readable figures from frozen Stage 3 outputs (writes `stage3_outputs/figures/`). |
 | `stage3_minilm_sensitivity.py` | Additional frozen post hoc MiniLM semantic sensitivity analysis; writes `stage3_outputs/minilm_sensitivity/`. |
+| `stage3_minilm_sensitivity_config.json` | Frozen MiniLM model revision, checksum, features, splits, and analysis settings. |
 | `verify_stage3_minilm_sensitivity.py` | Verifies MiniLM input/model hashes, feature invariance, predictions, and permutation controls. |
+| `STAGE3_MINILM_SENSITIVITY_PROTOCOL.md` | Frozen MiniLM sensitivity protocol. |
+| `STAGE3_MINILM_SENSITIVITY_README.md` | MiniLM methods, results, interpretation, and reproduction commands. |
+| `STAGE3_MINILM_SENSITIVITY_EXECUTION_NOTE.md` | Records the result-serialization fix made before the successful run. |
+| `stage3_outputs/minilm_sensitivity/` | Frozen MiniLM features, predictions, comparisons, permutation results, manifest, and final results. |
 
 ## Terminology
 
@@ -82,6 +101,14 @@ python verify_stage3.py
 ```
 
 This runs the 10 Stage 3 leakage, disjoint-partition, development-only-scaling, prediction-reproducibility, and label-permutation negative-control checks against the frozen Stage 3 outputs (all PASS).
+
+Run the separate MiniLM sensitivity checks with:
+
+```bash
+python verify_stage3_minilm_sensitivity.py
+```
+
+This verifies the frozen inputs and model file, six semantic features, feature invariance, predictions, and permutation controls (all PASS).
 
 ## Legacy mappings
 
