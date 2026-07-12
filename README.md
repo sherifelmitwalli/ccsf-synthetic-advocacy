@@ -14,6 +14,8 @@ A held-out multigenerator stress test was executed on 2026-07-11 at a preliminar
 
 Stage 3 is an **exploratory post hoc synthetic extension**, designed *after* Stage 2 and motivated by its negative finding. It is **not prespecified**. It performs **no new generation, uses no APIs, and uses no real-world data** — only the frozen Stage 2 outputs. Its protocol, configuration, and feature list were frozen and committed *before* any Stage 3 held-out performance was computed. It asks whether **label-free cross-account relational features** (nearest-neighbour cosine/Jaccard similarity and mutual-kNN graph structure, computed transductively within each unlabelled held-out generator-family batch) improve leave-one-generator-family-out discrimination beyond the account-level features. Adding relational features raises pooled held-out ROC AUC from 0.799 (CCSF-LR) to 0.993 (hybrid) against all controls and to 0.996 against organic-style controls only, with paired-bootstrap gains of +0.193 [0.129, 0.268] and +0.275 [0.185, 0.365]; the fixed-direction composite remains below chance and a label-permutation control sits at chance (no leakage). Because the synthetic coordinated accounts share a fixed talking-point repertoire, this is a **synthetic construct demonstration under a transductive batch design, not evidence of real-world detection, attribution, or operational readiness**, and it does not replace the Stage 2 negative result. See `STAGE3_README.md`, `STAGE3_PROTOCOL.md`, and `stage3_outputs/`.
 
+An additional post hoc MiniLM sensitivity analysis was frozen before MiniLM performance was calculated. MiniLM semantic-only reproduced strong coordinated-versus-organic separation (AUC 0.976), and a CCSF-MiniLM-lexical hybrid reached AUC 0.998 against all controls and 0.997 against organic-style controls, statistically equivalent to the primary TF-IDF hybrid. This supports a semantic relational signal beyond literal overlap while retaining the synthetic and transductive scope. See `STAGE3_MINILM_SENSITIVITY_README.md`.
+
 ## Repository map
 
 | File or folder | Purpose |
@@ -35,6 +37,8 @@ Stage 3 is an **exploratory post hoc synthetic extension**, designed *after* Sta
 | `stage3_evaluate.py` | Stage 3 four-model (fixed CCSF / CCSF-LR / relational-only / hybrid) leave-one-generator-family-out evaluation over frozen outputs; writes `stage3_outputs/` results, comparisons, permutation control, manifest. |
 | `verify_stage3.py` | Stage 3 leakage, partition, dev-only-scaling, prediction-reproducibility, and label-permutation negative-control checks (10 checks). |
 | `stage3_figures.py` | Stage 3 grayscale-readable figures from frozen Stage 3 outputs (writes `stage3_outputs/figures/`). |
+| `stage3_minilm_sensitivity.py` | Additional frozen post hoc MiniLM semantic sensitivity analysis; writes `stage3_outputs/minilm_sensitivity/`. |
+| `verify_stage3_minilm_sensitivity.py` | Verifies MiniLM input/model hashes, feature invariance, predictions, and permutation controls. |
 
 ## Terminology
 

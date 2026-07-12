@@ -1,0 +1,61 @@
+{
+  "minilm_semantic_only": {
+    "n_perm": 150,
+    "mean_auc": 0.5086655092592592,
+    "ci": [
+      0.3207465277777778,
+      0.6991319444444445
+    ],
+    "max_auc": 0.7850694444444445,
+    "feats": [
+      "minilm_top3_cosine_mean",
+      "minilm_max_cosine",
+      "minilm_local_neighborhood_centroid_similarity",
+      "minilm_mutual_knn_weighted_degree",
+      "minilm_mutual_knn_clustering",
+      "minilm_mutual_knn_component_size_normalized"
+    ]
+  },
+  "minilm_semantic_plus_lexical": {
+    "n_perm": 150,
+    "mean_auc": 0.5041018518518519,
+    "ci": [
+      0.3338454861111111,
+      0.6791883680555556
+    ],
+    "max_auc": 0.7847222222222222,
+    "feats": [
+      "minilm_top3_cosine_mean",
+      "minilm_max_cosine",
+      "minilm_local_neighborhood_centroid_similarity",
+      "minilm_mutual_knn_weighted_degree",
+      "minilm_mutual_knn_clustering",
+      "minilm_mutual_knn_component_size_normalized",
+      "top3_jaccard_mean",
+      "max_jaccard"
+    ]
+  },
+  "ccsf_plus_minilm_semantic_plus_lexical": {
+    "n_perm": 150,
+    "mean_auc": 0.502925925925926,
+    "ci": [
+      0.31475694444444446,
+      0.7208289930555556
+    ],
+    "max_auc": 0.7862847222222222,
+    "feats": [
+      "ppl_mean",
+      "burstiness",
+      "commercial_policy_framing",
+      "convergence",
+      "minilm_top3_cosine_mean",
+      "minilm_max_cosine",
+      "minilm_local_neighborhood_centroid_similarity",
+      "minilm_mutual_knn_weighted_degree",
+      "minilm_mutual_knn_clustering",
+      "minilm_mutual_knn_component_size_normalized",
+      "top3_jaccard_mean",
+      "max_jaccard"
+    ]
+  }
+}

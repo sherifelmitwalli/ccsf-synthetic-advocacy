@@ -1,0 +1,71 @@
+{
+  "status": "verified",
+  "analysis": "post_hoc_stage3_minilm_sensitivity",
+  "seed": 20260604,
+  "model": {
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "model_file_sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+    "normalize_embeddings": true
+  },
+  "input_sha256": {
+    "stage2_outputs/stage2_validation_corpus.csv": "67b764341661d59df36bcf48bc790efb9bfb82d9fd5b86090eb9505ed661c278",
+    "stage2_outputs/stage2_account_features.csv": "dc8b85383063b64ca4d3a0421c420ae179e2ae67b205cbc87c0eb575b6fac697",
+    "stage2_outputs/stage2_splits/leave_one_generator_id_out.json": "6cb54f81e2f94b4199aeb4dded28b7d06873d4105507547d754553c81cf9a172",
+    "stage3_outputs/stage3_account_relational_features.csv": "f7a05ad13d8dbdea4613191c791379f44e5d16d400b918c37c57b05e24793463",
+    "stage3_outputs/stage3_predictions.csv": "0ea1ec4a9fcea243c5135358f980c6c6e186613ec263cc1530ccb0f969757d83",
+    "stage3_outputs/stage3_results.json": "42c09527009ba80744b352b329d621bae95362ad3e6f86051c5c58ef06e819b9"
+  },
+  "protocol_sha256": "b1361e65ec488dfffc0e39892e765380ec7f48fff886bd690a892c15a2365838",
+  "config_sha256": "c83f32dff1986ed0e300db4c8ce73f344bdf7ec8f275f587d47ed7cd20c07775",
+  "code_sha256": "cf7a015ccebf04b24408171c04bd1aa8782930bae196005f2bb722c44a0ef331",
+  "model_file_sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+  "verification": {"script": "verify_stage3_minilm_sensitivity.py", "status": "all_checks_passed"},
+  "feature_invariance": {
+    "label_permutation": "passed",
+    "row_shuffle": "passed"
+  },
+  "features": {
+    "minilm_semantic_only": [
+      "minilm_top3_cosine_mean",
+      "minilm_max_cosine",
+      "minilm_local_neighborhood_centroid_similarity",
+      "minilm_mutual_knn_weighted_degree",
+      "minilm_mutual_knn_clustering",
+      "minilm_mutual_knn_component_size_normalized"
+    ],
+    "minilm_semantic_plus_lexical": [
+      "minilm_top3_cosine_mean",
+      "minilm_max_cosine",
+      "minilm_local_neighborhood_centroid_similarity",
+      "minilm_mutual_knn_weighted_degree",
+      "minilm_mutual_knn_clustering",
+      "minilm_mutual_knn_component_size_normalized",
+      "top3_jaccard_mean",
+      "max_jaccard"
+    ],
+    "ccsf_plus_minilm_semantic_plus_lexical": [
+      "ppl_mean",
+      "burstiness",
+      "commercial_policy_framing",
+      "convergence",
+      "minilm_top3_cosine_mean",
+      "minilm_max_cosine",
+      "minilm_local_neighborhood_centroid_similarity",
+      "minilm_mutual_knn_weighted_degree",
+      "minilm_mutual_knn_clustering",
+      "minilm_mutual_knn_component_size_normalized",
+      "top3_jaccard_mean",
+      "max_jaccard"
+    ]
+  },
+  "packages": {
+    "python": "3.13.5",
+    "sentence_transformers": "5.2.0",
+    "torch": "2.9.1+cpu",
+    "sklearn": "1.7.0",
+    "numpy": "2.3.1",
+    "pandas": "2.2.3",
+    "networkx": "3.6"
+  }
+}

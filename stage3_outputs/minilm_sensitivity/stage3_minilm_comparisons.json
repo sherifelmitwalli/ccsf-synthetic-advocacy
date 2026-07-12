@@ -1,0 +1,76 @@
+{
+  "all": {
+    "minilm_semantic_only_minus_ccsf_lr": {
+      "delta_auc": 0.04236111111111118,
+      "ci": [
+        -0.06651475694444452,
+        0.15174045138888895
+      ]
+    },
+    "minilm_semantic_plus_lexical_minus_relational_only": {
+      "delta_auc": -0.12708333333333333,
+      "ci": [
+        -0.1989626736111111,
+        -0.06214843750000008
+      ]
+    },
+    "ccsf_plus_minilm_semantic_plus_lexical_minus_hybrid": {
+      "delta_auc": 0.004861111111111094,
+      "ci": [
+        -0.0013932291666666594,
+        0.014236111111111008
+      ]
+    },
+    "minilm_semantic_plus_lexical_minus_minilm_semantic_only": {
+      "delta_auc": 0.004861111111111094,
+      "ci": [
+        -0.00520833333333337,
+        0.01493489583333331
+      ]
+    },
+    "ccsf_plus_minilm_semantic_plus_lexical_minus_ccsf_lr": {
+      "delta_auc": 0.1982638888888889,
+      "ci": [
+        0.13593315972222217,
+        0.27066406249999997
+      ]
+    }
+  },
+  "organic_only": {
+    "minilm_semantic_only_minus_ccsf_lr": {
+      "delta_auc": 0.25555555555555554,
+      "ci": [
+        0.15943750000000007,
+        0.352798611111111
+      ]
+    },
+    "minilm_semantic_plus_lexical_minus_relational_only": {
+      "delta_auc": 0.0002777777777777102,
+      "ci": [
+        -0.022777777777777786,
+        0.02444444444444438
+      ]
+    },
+    "ccsf_plus_minilm_semantic_plus_lexical_minus_hybrid": {
+      "delta_auc": 0.0016666666666667052,
+      "ci": [
+        -0.0050000000000000044,
+        0.010284722222222235
+      ]
+    },
+    "minilm_semantic_plus_lexical_minus_minilm_semantic_only": {
+      "delta_auc": 0.005555555555555536,
+      "ci": [
+        -0.0005555555555556424,
+        0.015000000000000013
+      ]
+    },
+    "ccsf_plus_minilm_semantic_plus_lexical_minus_ccsf_lr": {
+      "delta_auc": 0.2763888888888889,
+      "ci": [
+        0.18860416666666663,
+        0.3680625
+      ]
+    }
+  }
+}

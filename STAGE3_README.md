@@ -22,9 +22,9 @@ tests whether relational structure adds incremental synthetic discrimination.
 - **Unit:** one account (156 accounts; 60 coordinated, 96 controls).
 - **Representation:** deterministic, download-free TF-IDF (word 1-2 grams, L2-normalised) fit within
   each generator-family batch; each account centroid is the L2-normalised mean of its 8 post vectors.
-  *(The project's neural MiniLM instrument is network-unavailable in this offline environment; the
-  MiniLM convergence feature is still present inside the CCSF/CCSF-LR/hybrid account features. This
-  substitution is documented as a Stage 3 limitation.)*
+  This was the frozen primary Stage 3 representation. A separately frozen post hoc sensitivity
+  analysis subsequently evaluated MiniLM semantic relational features without changing the primary
+  analysis.
 - **Relational batch:** for each held-out generator family, relational features are computed
   **transductively within that unlabelled 52-account batch**. Generator family defines the batch and
   the splits only, it is never a predictor. No class, campaign, account, prompt, transformation,
@@ -67,10 +67,20 @@ tests whether relational structure adds incremental synthetic discrimination.
 - **Robustness:** hybrid separation is near-perfect across every transformation cell (0.98-1.00),
   including noise insertion.
 
+## Additional MiniLM sensitivity analysis
+
+The sensitivity protocol was frozen in commit `49a221e` before MiniLM cross-account performance was
+calculated. MiniLM semantic-only achieved pooled AUC 0.842 (95% CI 0.776-0.898) against all controls
+and 0.976 (95% CI 0.953-0.994) against organic-style controls. The CCSF-MiniLM-lexical hybrid reached
+0.998 (95% CI 0.993-1.000) and 0.997 (95% CI 0.992-1.000), statistically equivalent to the primary
+TF-IDF hybrid. This shows that semantic relational structure reproduces the harder coordinated-versus-
+organic result; semantic relations alone are weaker against professional controls. See
+`STAGE3_MINILM_SENSITIVITY_README.md` and `stage3_outputs/minilm_sensitivity/`.
+
 ## Essential caveat
 
 The very high hybrid AUC reflects that the synthetic **coordinated accounts were generated from a
-shared talking-point repertoire**, so within a batch their content is genuinely near-duplicated and
+shared talking-point repertoire**, so within a batch their content shares recurring repertoire language and
 relational similarity largely recovers the generative design. This is a **synthetic construct
 demonstration under a transductive batch design**, not evidence of real-world coordination detection,
 authentic-human detection, attribution, or operational readiness. The Stage 2 negative finding is not
