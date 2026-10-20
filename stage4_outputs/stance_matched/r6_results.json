@@ -1,0 +1,636 @@
+{
+ "seed": 20260604,
+ "analysis": "stage4_R6_stance_prompt_matched_post_hoc",
+ "matched_subset": {
+  "per_family": "7 coordinated vs 7 supportive organic (k % 3 == 0)",
+  "pooled": "21 vs 21",
+  "pairs": [
+   {
+    "generator_family": "alibaba_qwen",
+    "k": 0,
+    "coordinated": "qwen_3_6_35b_coordinated_00",
+    "organic": "qwen_3_6_35b_organic_00",
+    "campaign": "qwen_3_6_35b_camp0",
+    "topic": "flavour restrictions for nicotine vaping products",
+    "temperature": 0.35,
+    "transformation_id": "none",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "alibaba_qwen",
+    "k": 3,
+    "coordinated": "qwen_3_6_35b_coordinated_03",
+    "organic": "qwen_3_6_35b_organic_03",
+    "campaign": "qwen_3_6_35b_camp1",
+    "topic": "retail licensing for nicotine product sellers",
+    "temperature": 0.95,
+    "transformation_id": "sentence_restructure",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "alibaba_qwen",
+    "k": 6,
+    "coordinated": "qwen_3_6_35b_coordinated_06",
+    "organic": "qwen_3_6_35b_organic_06",
+    "campaign": "qwen_3_6_35b_camp0",
+    "topic": "product safety and manufacturing standards for vaping devices",
+    "temperature": 0.35,
+    "transformation_id": "noise_insertion",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "alibaba_qwen",
+    "k": 9,
+    "coordinated": "qwen_3_6_35b_coordinated_09",
+    "organic": "qwen_3_6_35b_organic_09",
+    "campaign": "qwen_3_6_35b_camp1",
+    "topic": "taxation of alternative nicotine products",
+    "temperature": 0.95,
+    "transformation_id": "llm_paraphrase",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "alibaba_qwen",
+    "k": 12,
+    "coordinated": "qwen_3_6_35b_coordinated_12",
+    "organic": "qwen_3_6_35b_organic_12",
+    "campaign": "qwen_3_6_35b_camp0",
+    "topic": "enforcement of youth access laws for vaping products",
+    "temperature": 0.35,
+    "transformation_id": "none",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "alibaba_qwen",
+    "k": 15,
+    "coordinated": "qwen_3_6_35b_coordinated_15",
+    "organic": "qwen_3_6_35b_organic_15",
+    "campaign": "qwen_3_6_35b_camp1",
+    "topic": "the role of vaping products in smoking cessation services",
+    "temperature": 0.95,
+    "transformation_id": "sentence_restructure",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "alibaba_qwen",
+    "k": 18,
+    "coordinated": "qwen_3_6_35b_coordinated_18",
+    "organic": "qwen_3_6_35b_organic_18",
+    "campaign": "qwen_3_6_35b_camp0",
+    "topic": "advertising and promotion rules for vaping products",
+    "temperature": 0.35,
+    "transformation_id": "noise_insertion",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "google_gemini",
+    "k": 0,
+    "coordinated": "gemini_flash_lite_coordinated_00",
+    "organic": "gemini_flash_lite_organic_00",
+    "campaign": "gemini_flash_lite_camp0",
+    "topic": "flavour restrictions for nicotine vaping products",
+    "temperature": 0.35,
+    "transformation_id": "none",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "google_gemini",
+    "k": 3,
+    "coordinated": "gemini_flash_lite_coordinated_03",
+    "organic": "gemini_flash_lite_organic_03",
+    "campaign": "gemini_flash_lite_camp1",
+    "topic": "retail licensing for nicotine product sellers",
+    "temperature": 0.95,
+    "transformation_id": "sentence_restructure",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "google_gemini",
+    "k": 6,
+    "coordinated": "gemini_flash_lite_coordinated_06",
+    "organic": "gemini_flash_lite_organic_06",
+    "campaign": "gemini_flash_lite_camp0",
+    "topic": "product safety and manufacturing standards for vaping devices",
+    "temperature": 0.35,
+    "transformation_id": "noise_insertion",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "google_gemini",
+    "k": 9,
+    "coordinated": "gemini_flash_lite_coordinated_09",
+    "organic": "gemini_flash_lite_organic_09",
+    "campaign": "gemini_flash_lite_camp1",
+    "topic": "taxation of alternative nicotine products",
+    "temperature": 0.95,
+    "transformation_id": "llm_paraphrase",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "google_gemini",
+    "k": 12,
+    "coordinated": "gemini_flash_lite_coordinated_12",
+    "organic": "gemini_flash_lite_organic_12",
+    "campaign": "gemini_flash_lite_camp0",
+    "topic": "enforcement of youth access laws for vaping products",
+    "temperature": 0.35,
+    "transformation_id": "none",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "google_gemini",
+    "k": 15,
+    "coordinated": "gemini_flash_lite_coordinated_15",
+    "organic": "gemini_flash_lite_organic_15",
+    "campaign": "gemini_flash_lite_camp1",
+    "topic": "the role of vaping products in smoking cessation services",
+    "temperature": 0.95,
+    "transformation_id": "sentence_restructure",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "google_gemini",
+    "k": 18,
+    "coordinated": "gemini_flash_lite_coordinated_18",
+    "organic": "gemini_flash_lite_organic_18",
+    "campaign": "gemini_flash_lite_camp0",
+    "topic": "advertising and promotion rules for vaping products",
+    "temperature": 0.35,
+    "transformation_id": "noise_insertion",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "bytedance_seed",
+    "k": 0,
+    "coordinated": "seed_2_mini_coordinated_00",
+    "organic": "seed_2_mini_organic_00",
+    "campaign": "seed_2_mini_camp0",
+    "topic": "flavour restrictions for nicotine vaping products",
+    "temperature": 0.35,
+    "transformation_id": "none",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "bytedance_seed",
+    "k": 3,
+    "coordinated": "seed_2_mini_coordinated_03",
+    "organic": "seed_2_mini_organic_03",
+    "campaign": "seed_2_mini_camp1",
+    "topic": "retail licensing for nicotine product sellers",
+    "temperature": 0.95,
+    "transformation_id": "sentence_restructure",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "bytedance_seed",
+    "k": 6,
+    "coordinated": "seed_2_mini_coordinated_06",
+    "organic": "seed_2_mini_organic_06",
+    "campaign": "seed_2_mini_camp0",
+    "topic": "product safety and manufacturing standards for vaping devices",
+    "temperature": 0.35,
+    "transformation_id": "noise_insertion",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "bytedance_seed",
+    "k": 9,
+    "coordinated": "seed_2_mini_coordinated_09",
+    "organic": "seed_2_mini_organic_09",
+    "campaign": "seed_2_mini_camp1",
+    "topic": "taxation of alternative nicotine products",
+    "temperature": 0.95,
+    "transformation_id": "llm_paraphrase",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "bytedance_seed",
+    "k": 12,
+    "coordinated": "seed_2_mini_coordinated_12",
+    "organic": "seed_2_mini_organic_12",
+    "campaign": "seed_2_mini_camp0",
+    "topic": "enforcement of youth access laws for vaping products",
+    "temperature": 0.35,
+    "transformation_id": "none",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "bytedance_seed",
+    "k": 15,
+    "coordinated": "seed_2_mini_coordinated_15",
+    "organic": "seed_2_mini_organic_15",
+    "campaign": "seed_2_mini_camp1",
+    "topic": "the role of vaping products in smoking cessation services",
+    "temperature": 0.95,
+    "transformation_id": "sentence_restructure",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   },
+   {
+    "generator_family": "bytedance_seed",
+    "k": 18,
+    "coordinated": "seed_2_mini_coordinated_18",
+    "organic": "seed_2_mini_organic_18",
+    "campaign": "seed_2_mini_camp0",
+    "topic": "advertising and promotion rules for vaping products",
+    "temperature": 0.35,
+    "transformation_id": "noise_insertion",
+    "organic_stance_rule": "ORGANIC_STANCES[k % 3] = supportive"
+   }
+  ]
+ },
+ "R6a_original_models_matched_subset": {
+  "per_family": {
+   "alibaba_qwen": {
+    "ccsf_lr": {
+     "auc": 0.673469387755102,
+     "ci": [
+      0.3469387755102041,
+      0.9183673469387755
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "relational_only": {
+     "auc": 0.9591836734693877,
+     "ci": [
+      0.8163265306122449,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "hybrid": {
+     "auc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "content_tfidf_lr": {
+     "auc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    }
+   },
+   "google_gemini": {
+    "ccsf_lr": {
+     "auc": 0.7142857142857143,
+     "ci": [
+      0.40816326530612246,
+      0.9591836734693877
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "relational_only": {
+     "auc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "hybrid": {
+     "auc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "content_tfidf_lr": {
+     "auc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    }
+   },
+   "bytedance_seed": {
+    "ccsf_lr": {
+     "auc": 0.5510204081632653,
+     "ci": [
+      0.22448979591836735,
+      0.8576530612244869
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "relational_only": {
+     "auc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "hybrid": {
+     "auc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "content_tfidf_lr": {
+     "auc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    }
+   }
+  },
+  "pooled": {
+   "ccsf_lr": {
+    "auc": 0.6507936507936508,
+    "ci": [
+     0.47392290249433106,
+     0.8141156462585031
+    ],
+    "n_coordinated": 21,
+    "n_organic": 21
+   },
+   "relational_only": {
+    "auc": 0.9931972789115646,
+    "ci": [
+     0.9727891156462585,
+     1.0
+    ],
+    "n_coordinated": 21,
+    "n_organic": 21
+   },
+   "hybrid": {
+    "auc": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n_coordinated": 21,
+    "n_organic": 21
+   },
+   "content_tfidf_lr": {
+    "auc": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n_coordinated": 21,
+    "n_organic": 21
+   }
+  },
+  "paired_pooled": {
+   "hybrid_minus_content": {
+    "delta_auc": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   },
+   "relational_only_minus_content": {
+    "delta_auc": -0.006802721088435382,
+    "ci": [
+     -0.027210884353741527,
+     0.0
+    ]
+   },
+   "ccsf_lr_minus_content": {
+    "delta_auc": -0.3492063492063492,
+    "ci": [
+     -0.5284013605442177,
+     -0.19274376417233563
+    ]
+   }
+  }
+ },
+ "R6b_retrained_on_matched_subset": {
+  "per_family": {
+   "alibaba_qwen": {
+    "ccsf_lr": {
+     "auc": 0.8979591836734694,
+     "ci": [
+      0.6938775510204082,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "relational_only": {
+     "auc": 0.9591836734693877,
+     "ci": [
+      0.8367346938775511,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "hybrid": {
+     "auc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "content_tfidf_lr": {
+     "auc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    }
+   },
+   "google_gemini": {
+    "ccsf_lr": {
+     "auc": 0.8367346938775511,
+     "ci": [
+      0.5714285714285714,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "relational_only": {
+     "auc": 0.9387755102040817,
+     "ci": [
+      0.7551020408163265,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "hybrid": {
+     "auc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "content_tfidf_lr": {
+     "auc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    }
+   },
+   "bytedance_seed": {
+    "ccsf_lr": {
+     "auc": 0.8163265306122449,
+     "ci": [
+      0.5505102040816326,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "relational_only": {
+     "auc": 0.9795918367346939,
+     "ci": [
+      0.8775510204081632,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "hybrid": {
+     "auc": 0.9591836734693877,
+     "ci": [
+      0.8163265306122449,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    },
+    "content_tfidf_lr": {
+     "auc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n_coordinated": 7,
+     "n_organic": 7
+    }
+   }
+  },
+  "pooled": {
+   "ccsf_lr": {
+    "auc": 0.8412698412698413,
+    "ci": [
+     0.7029478458049887,
+     0.9478458049886621
+    ],
+    "n_coordinated": 21,
+    "n_organic": 21
+   },
+   "relational_only": {
+    "auc": 0.9591836734693877,
+    "ci": [
+     0.8888888888888888,
+     1.0
+    ],
+    "n_coordinated": 21,
+    "n_organic": 21
+   },
+   "hybrid": {
+    "auc": 0.9863945578231292,
+    "ci": [
+     0.9546485260770975,
+     1.0
+    ],
+    "n_coordinated": 21,
+    "n_organic": 21
+   },
+   "content_tfidf_lr": {
+    "auc": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n_coordinated": 21,
+    "n_organic": 21
+   }
+  },
+  "paired_pooled": {
+   "hybrid_minus_content": {
+    "delta_auc": -0.013605442176870763,
+    "ci": [
+     -0.04761904761904767,
+     0.0
+    ]
+   },
+   "relational_only_minus_content": {
+    "delta_auc": -0.04081632653061229,
+    "ci": [
+     -0.10430839002267578,
+     0.0
+    ]
+   },
+   "ccsf_lr_minus_content": {
+    "delta_auc": -0.15873015873015872,
+    "ci": [
+     -0.2970521541950113,
+     -0.05442176870748294
+    ]
+   }
+  }
+ },
+ "R6c_permutation_null_R6b": {
+  "content_tfidf_lr": {
+   "n_perm": 200,
+   "mean_auc": 0.5051133786848072,
+   "p2.5": 0.12001133786848073,
+   "p97.5": 0.89359410430839,
+   "p_value_vs_observed": 0.004975124378109453,
+   "observed_auc": 1.0
+  },
+  "hybrid": {
+   "n_perm": 200,
+   "mean_auc": 0.502562358276644,
+   "p2.5": 0.2763605442176871,
+   "p97.5": 0.730328798185941,
+   "p_value_vs_observed": 0.004975124378109453,
+   "observed_auc": 0.9863945578231292
+  }
+ },
+ "R6d_register_markers": {
+  "coordinated": {
+   "i": 0.3333333333333333,
+   "my": 0.14285714285714285,
+   "we": 1.0,
+   "our": 0.7619047619047619,
+   "n_accounts": 21
+  },
+  "organic": {
+   "i": 1.0,
+   "my": 0.8095238095238095,
+   "we": 0.8095238095238095,
+   "our": 0.19047619047619047,
+   "n_accounts": 21
+  }
+ },
+ "reference_unmatched_full_batches": {
+  "content_tfidf_lr_pooled_auc_all": 1.0
+ }
+}

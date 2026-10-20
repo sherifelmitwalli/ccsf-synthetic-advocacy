@@ -7,3 +7,9 @@ matplotlib==3.10.8
 torch==2.12.0
 transformers==4.44.2
 sentence-transformers==5.5.1
+
+# Not pinned in the original lock file but required by Stages 3-4 (versions used for Stage 4 runs):
+pandas==3.0.5
+networkx==3.7
+# Stage 4 was run under Python 3.13 with scikit-learn 1.9.1, numpy 2.5.3, torch 2.14.1+cpu,
+# sentence-transformers 6.1.0; see stage4_outputs/stage4_manifest.json.

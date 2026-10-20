@@ -8,7 +8,7 @@ Code and reproducibility package: Sherif Elmitwalli (`se606@bath.ac.uk`).
 
 ## Installation
 
-Python 3.12 was used for the frozen analyses. Install the exact tested dependencies with:
+Python 3.12 was used for the frozen Stage 1–3 analyses; the Stage 3 and Stage 4 checks also pass under Python 3.13 (see `STAGE4_README.md`). Install the exact tested dependencies with:
 
 ```bash
 python -m pip install -r requirements-lock.txt
@@ -29,6 +29,10 @@ A held-out multigenerator stress test was executed on 2026-07-11 at a preliminar
 Stage 3 is an **exploratory post hoc synthetic extension**, designed *after* Stage 2 and motivated by its negative finding. It is **not prespecified**. It performs **no new generation, uses no APIs, and uses no real-world data** — only the frozen Stage 2 outputs. Its protocol, configuration, and feature list were frozen and committed *before* any Stage 3 held-out performance was computed. It asks whether **label-free cross-account relational features** (nearest-neighbour cosine/Jaccard similarity and mutual-kNN graph structure, computed transductively within each unlabelled held-out generator-family batch) improve leave-one-generator-family-out discrimination beyond the account-level features. Adding relational features raises pooled held-out ROC AUC from 0.799 (CCSF-LR) to 0.993 (hybrid) against all controls and to 0.996 against organic-style controls only, with paired-bootstrap gains of +0.193 [0.129, 0.268] and +0.275 [0.185, 0.365]; the fixed-direction composite remains below chance and a label-permutation control sits at chance (no leakage). Because the synthetic coordinated accounts share a fixed talking-point repertoire, this is a **synthetic construct demonstration under a transductive batch design, not evidence of real-world detection, attribution, or operational readiness**, and it does not replace the Stage 2 negative result. See `STAGE3_README.md`, `STAGE3_PROTOCOL.md`, and `stage3_outputs/`.
 
 An additional post hoc MiniLM sensitivity analysis was frozen before MiniLM performance was calculated. MiniLM semantic-only reproduced strong coordinated-versus-organic separation (AUC 0.976), and a CCSF-MiniLM-lexical hybrid reached AUC 0.998 against all controls and 0.997 against organic-style controls, statistically equivalent to the primary TF-IDF hybrid. This supports a semantic relational signal beyond literal overlap while retaining the synthetic and transductive scope. See `STAGE3_MINILM_SENSITIVITY_README.md`.
+
+### Stage 4 (post hoc robustness audit, synthetic — `stage4_outputs/`)
+
+Stage 4 audits the Stage 3 result using only frozen outputs; its protocol (`STAGE4_PROTOCOL.md`) was checksummed before any result was computed. With a single campaign account in the unlabeled batch, the hybrid model's held-out AUC (0.795) equals the account-level CCSF-LR (0.793); it rises to 0.933 with three and 0.992 with ten campaign accounts. A plain supervised TF-IDF content classifier reaches AUC 1.000 under leave-one-generator-family-out and 0.980–0.981 on an unseen talking-point repertoire, because the generation conditions differ in ways other than coordination. A further post hoc analysis (R6; protocol committed before results) shows the content classifier still reaches AUC 1.000 against stance- and prompt-matched organic controls. See `STAGE4_README.md`.
 
 ## Repository map
 
@@ -58,6 +62,12 @@ An additional post hoc MiniLM sensitivity analysis was frozen before MiniLM perf
 | `STAGE3_MINILM_SENSITIVITY_README.md` | MiniLM methods, results, interpretation, and reproduction commands. |
 | `STAGE3_MINILM_SENSITIVITY_EXECUTION_NOTE.md` | Records the result-serialization fix made before the successful run. |
 | `stage3_outputs/minilm_sensitivity/` | Frozen MiniLM features, predictions, comparisons, permutation results, manifest, and final results. |
+| `STAGE4_PROTOCOL.md`, `STAGE4_PROTOCOL.sha256` | Stage 4 protocol and its pre-results checksum. |
+| `stage4_robustness.py` | Stage 4 analyses R1–R5 (campaign-size dilution, mixed background, baselines, cross-repertoire transfer, MiniLM sensitivity); writes `stage4_outputs/`. |
+| `verify_stage4.py` | Stage 4 verification (10 checks). |
+| `stage4_figures.py`, `make_figure1_frontiers.py` | Stage 4 figure and the four-stage design figure (300 dpi PNG + TIFF, 180 mm). |
+| `STAGE4_STANCE_PROTOCOL.md`, `STAGE4_STANCE_PROTOCOL.sha256`, `stage4_stance_matched.py`, `verify_stage4_stance.py` | Stage 4 R6 stance- and prompt-matched sensitivity analysis (post hoc), its pre-results protocol and 10 checks; writes `stage4_outputs/stance_matched/`. |
+| `stage4_outputs/` | Stage 4 per-draw metrics, results, content-classifier predictions, manifest, figures. |
 
 ## Terminology
 
@@ -109,6 +119,15 @@ python verify_stage3_minilm_sensitivity.py
 ```
 
 This verifies the frozen inputs and model file, six semantic features, feature invariance, predictions, and permutation controls (all PASS).
+
+Run the Stage 4 checks with:
+
+```bash
+python verify_stage4.py
+python verify_stage4_stance.py
+```
+
+This verifies the pre-results protocol checksum, input/output checksums, exact reproduction of the frozen Stage 3 features, label-free construction, split disjointness, determinism, and development-only vocabulary fitting (all PASS).
 
 ## Legacy mappings
 

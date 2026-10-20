@@ -43,3 +43,8 @@ stage2_outputs/stage2_raw_responses.jsonl
 stage2_outputs/stage2_paraphrase_responses.jsonl
 stage2_outputs/stage2_requests.jsonl
 stage2_outputs/stage2_final_posts.jsonl
+
+# Keep dependency files and Stage 3/4 text manifests despite the *.txt rule above
+!requirements.txt
+!requirements-lock.txt
+!stage3_outputs/*.txt
