@@ -1,0 +1,4 @@
+# Store every file byte-exact (no line-ending conversion). Frozen SHA-256 checksums recorded in the
+# protocols and manifests refer to the exact bytes of the analysed files (CRLF line endings), so
+# they must verify identically on every platform and from a fresh clone.
+* -text
